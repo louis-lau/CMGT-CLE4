@@ -5,8 +5,9 @@ import { GameScene } from "./scenes/game-scene"
 import { EndScene } from "./scenes/end-scene"
 
 const config: GameConfig = {
-    width: 800,
-    height: 600,
+    width: 480,
+    height: 270,
+    zoom: 2,
     parent: "game",
     resolution: window.devicePixelRatio,
     scene: [BootScene, StartScene, GameScene, EndScene],
@@ -17,7 +18,6 @@ const config: GameConfig = {
         default: "arcade",
         arcade: {
             debug: false, 
-            gravity: { y: 400 }
         }
     },
     render: { pixelArt: true }

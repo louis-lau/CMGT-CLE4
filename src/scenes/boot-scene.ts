@@ -22,6 +22,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('pigeon', require('../assets/img/pigeon.png'))
         this.load.image('rasta-pigeon', require('../assets/img/rasta-pigeon.png'))
         this.load.image('white-shit', require('../assets/img/white-shit.png'))
+        this.load.image('background1', require('../assets/img/background1.png'))
 
         this.load.on('complete', () => {
             console.log("everything is loaded")

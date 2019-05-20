@@ -11,7 +11,7 @@ export class StartScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.add.image(0, 0, 'pigeon').setOrigin(0, 0)
+        // this.add.image(0, 0, 'pigeon').setOrigin(0, 0)
 
         // add another image here
 
@@ -20,6 +20,8 @@ export class StartScene extends Phaser.Scene {
         // this.add.text(400, 300, 'MY GAME TITLE', { fontFamily: 'Arial Black', fontSize: 70, color: '#2ac9be' }).setOrigin(0.5).setStroke('#7df2ea', 16)
 
         // add code here to switch to the GameScene, after a mouse click
-        
+        this.input.once('pointerdown', (pointer) => {
+            this.scene.start('GameScene')
+        })
     }
 }
