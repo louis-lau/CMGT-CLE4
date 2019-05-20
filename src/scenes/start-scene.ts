@@ -11,7 +11,7 @@ export class StartScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.add.image(0, 0, 'sky').setOrigin(0, 0)
+        this.add.image(0, 0, 'pigeon').setOrigin(0, 0)
 
         // add another image here
 
