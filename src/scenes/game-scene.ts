@@ -54,7 +54,7 @@ export class GameScene extends Phaser.Scene {
         this.player.update()
         this.flats.tilePositionX -= 2.5;
         this.house1.tilePositionX -= 2;
-        this.house2.tilePositionX -= 2;
+        this.house2.tilePositionX -= 1.5;
     }
 
 }
