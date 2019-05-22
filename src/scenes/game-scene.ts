@@ -6,7 +6,9 @@ export class GameScene extends Phaser.Scene {
 
     private player: Player
     private food: Phaser.Physics.Arcade.Group
-    private bg: Phaser.GameObjects.TileSprite
+    private flats: Phaser.GameObjects.TileSprite
+    private house1: Phaser.GameObjects.TileSprite
+    private house2: Phaser.GameObjects.TileSprite
 
     constructor() {
         super({ key: "GameScene" })
@@ -17,32 +19,26 @@ export class GameScene extends Phaser.Scene {
     }
 
     create(): void {
-        // this.add.image(0, 0, 'background1').setOrigin(0, 0)      
-        this.bg = this.add.tileSprite(0, 0, 5000, 270, 'background1').setOrigin(0);
+        this.physics.world.bounds.width = 5000
 
-        // 11 STARS
+        this.add.tileSprite(0, 0, this.physics.world.bounds.width, 270, 'city-sky').setOrigin(0);
+        this.flats = this.add.tileSprite(50, 117, this.physics.world.bounds.width, 270, 'flat').setOrigin(0);
+        this.house1 = this.add.tileSprite(100, 223, this.physics.world.bounds.width, 270, 'house1').setOrigin(0);
+        this.house2 = this.add.tileSprite(300, 223, this.physics.world.bounds.width, 270, 'house2').setOrigin(0);
+
+        this.player = new Player(this)
+
+        this.cameras.main.setSize(480, 270)          // canvas size
+        this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, 270) // world size
+        this.cameras.main.startFollow(this.player, true, 1, 1, -175)
+
+
+        // 11 cans
         this.food = this.physics.add.group({
             key: 'cola-can',
             repeat: 11,
             setXY: { x: 12, y: 30, stepX: 70 },
         })
-
-        // TODO add player
-        this.player = new Player(this)
-
-        //this.platforms = this.add.group({ runChildUpdate: true })
-        //this.platforms.addMultiple([], true)
-        
-        // define collisions for bouncing, and overlaps for pickups
-        // this.physics.add.collider(this.stars, this.platforms)
-        // this.physics.add.collider(this.player, this.platforms)
-        
-        // this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
-        this.physics.world.bounds.width = 5000
-
-        this.cameras.main.setSize(480, 270)          // canvas size
-        this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, 270) // world size
-        this.cameras.main.startFollow(this.player, true, 1, 1, -175)
 
     }
 
@@ -56,7 +52,9 @@ export class GameScene extends Phaser.Scene {
 
     update(){
         this.player.update()
-        this.bg.tilePositionX -= 1;
+        this.flats.tilePositionX -= 2.5;
+        this.house1.tilePositionX -= 2;
+        this.house2.tilePositionX -= 2;
     }
 
 }
