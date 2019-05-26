@@ -14,11 +14,14 @@ export class BackgroundLayer extends Phaser.GameObjects.TileSprite {
         
         this.scene.add.existing(this)
         this.setOrigin(0)
-        this._speed = speed;
+        this._speed = speed
     }
 
-    public update() {
-        this.tilePositionX -= this.speed;
+    /**
+     * @param currentVelocity Optionally pass the current X velocity of the player to adjust parallax speed based on velocity
+     */
+    public update(currentVelocity = 200) {
+        this.tilePositionX -= (currentVelocity / 200) * this.speed
     }
 
     public get speed() {
