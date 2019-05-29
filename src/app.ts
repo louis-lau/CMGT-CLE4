@@ -15,9 +15,16 @@ const config: Phaser.Types.Core.GameConfig = {
     resolution: window.devicePixelRatio,
      // @ts-ignore Issue with Typescript definitions in Phaser 3.17.0
     scene: [BootScene, StartScene, GameScene, EndScene],
+
     input: {
         keyboard: true
     },
+    //audio
+    audio: 
+    {
+        disableWebAudio: true
+    },
+
     physics: {
         default: "arcade",
         arcade: {
