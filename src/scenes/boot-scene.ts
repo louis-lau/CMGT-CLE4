@@ -21,7 +21,11 @@ export class BootScene extends Phaser.Scene {
         this.load.image('flat', require('../assets/img/flat.png'))
         this.load.image('house1', require('../assets/img/house1.png'))
         this.load.image('house2', require('../assets/img/house2.png'))
-        this.load.image("tileset", require("../assets/tileset.png"));
+        this.load.image("alcohol", require("../assets/img/alcohol.png"));
+        this.load.image("chocolate", require("../assets/img/chocolate.png"));
+        this.load.image("cola-can", require("../assets/img/cola-can.png"));
+        this.load.image("fries", require("../assets/img/fries.png"));
+        this.load.image("fry", require("../assets/img/fry.png"));
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"));
 
         this.load.on('complete', () => {

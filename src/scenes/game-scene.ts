@@ -2,6 +2,7 @@ import { Player } from "../objects/player"
 import { BackgroundLayer } from "../objects/background-layer";
 import { Platform } from "../objects/platform"
 import { MovingPlatform } from "../objects/movingplatform"
+import { Game } from "../app";
 
 export class GameScene extends Phaser.Scene {
 
@@ -19,7 +20,6 @@ export class GameScene extends Phaser.Scene {
     create(): void {
         // Create map and tileset from loaded json and image
         const map = this.make.tilemap({ key: "map-city" });
-        const tileset = map.addTilesetImage("tileset");
         
         // Set bounds width to the width of the loaded map
         this.physics.world.bounds.width = map.widthInPixels
@@ -32,18 +32,34 @@ export class GameScene extends Phaser.Scene {
             new BackgroundLayer(this,"house2", 223, 1.5)
         )
         
-        // Load tilemap to scene
-        console.log(map)
-        let singleFries = map.createFromObjects("Object Layer 1", 3, {});
-        console.log(singleFries)
-
+        
         this.player = new Player(this)
+        
+
+        let foods = []
+        foods = foods.concat(
+            map.createFromObjects("Food", 2, {key: "chocolate"}),
+            map.createFromObjects("Food", 5, {key: "fry"})
+        )
+
+        for (const food of foods) {
+            // food.width = food.displayWidth
+            // food.height = food.displayHeight
+            this.physics.add.existing(food)
+            this.physics.add.overlap(this.player, food, this.collectFood, null, this)
+            console.log(food.body)
+            console.log(food)
+        }
 
         // Set camera bounds and start following
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height)
         this.cameras.main.startFollow(this.player, true, undefined, undefined, -175)
     }
-
+    
+    private collectFood(){
+        console.log("JE HEBT EEN FRIETJE GEGETEN JIJ DIKZAK!")
+    }
+    
     update(){
         this.player.update()
         // Call update function for all backgroundlayers
