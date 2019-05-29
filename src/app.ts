@@ -7,7 +7,10 @@ import { EndScene } from "./scenes/end-scene"
 const config: Phaser.Types.Core.GameConfig = {
     width: 480,
     height: 270,
-    zoom: 2,
+    scale: {
+        mode: Phaser.Scale.ScaleModes.FIT,
+        autoCenter: Phaser.Scale.Center.CENTER_BOTH
+    },
     parent: "game",
     resolution: window.devicePixelRatio,
      // @ts-ignore Issue with Typescript definitions in Phaser 3.17.0
