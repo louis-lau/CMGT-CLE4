@@ -33,7 +33,10 @@ export class GameScene extends Phaser.Scene {
         )
         
         // Load tilemap to scene
-        const mainLayer = map.createStaticLayer("Tile Layer 1", tileset, 0, 0.28125);
+        console.log(map)
+        let singleFries = map.createFromObjects("Object Layer 1", 3, {});
+        console.log(singleFries)
+
         this.player = new Player(this)
 
         // Set camera bounds and start following
