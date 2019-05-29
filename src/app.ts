@@ -11,9 +11,11 @@ const config: GameConfig = {
     parent: "game",
     resolution: window.devicePixelRatio,
     scene: [BootScene, StartScene, GameScene, EndScene],
+
     input: {
         keyboard: true
     },
+    // audio: {disableWebAudio: true},
     physics: {
         default: "arcade",
         arcade: {

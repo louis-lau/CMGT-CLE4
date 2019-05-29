@@ -23,6 +23,12 @@ export class BootScene extends Phaser.Scene {
         this.load.image('house2', require('../assets/img/house2.png'))
         this.load.image("tileset", require("../assets/tileset.png"));
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"));
+        
+        //audio files
+        this.load.audio('spacetheme', [
+            '../assets/audio/spacetheme.mp3',
+            '../assets/audio/spacetheme.ogg'
+        ]);
 
         this.load.on('complete', () => {
             console.log("everything is loaded")
