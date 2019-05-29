@@ -17,9 +17,10 @@ export class GameScene extends Phaser.Scene {
     }
     
     create(): void {
-        // Create background music and play
-        const music = this.sound.add('spacetheme');
+        // Create background music from loaded audio files and play
+        const music = this.sound.add('spacetheme', {loop: true});
         music.play();
+
             
        
         // Create map and tileset from loaded json and image

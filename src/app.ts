@@ -16,7 +16,12 @@ const config: Phaser.Types.Core.GameConfig = {
     input: {
         keyboard: true
     },
-    // audio: {disableWebAudio: true},
+    //audio
+    audio: 
+    {
+        disableWebAudio: true
+    },
+
     physics: {
         default: "arcade",
         arcade: {
