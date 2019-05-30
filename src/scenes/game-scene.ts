@@ -47,8 +47,8 @@ export class GameScene extends Phaser.Scene {
             // food.height = food.displayHeight
             this.physics.add.existing(food)
             this.physics.add.overlap(this.player, food, this.collectFood, null, this)
-            console.log(food.body)
-            console.log(food)
+            // console.log(food.body)
+            // console.log(food)
         }
 
         // Set camera bounds and start following
