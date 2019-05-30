@@ -4,16 +4,27 @@ import { StartScene } from "./scenes/start-scene"
 import { GameScene } from "./scenes/game-scene"
 import { EndScene } from "./scenes/end-scene"
 
-const config: GameConfig = {
+const config: Phaser.Types.Core.GameConfig = {
     width: 480,
     height: 270,
-    zoom: 2,
+    scale: {
+        mode: Phaser.Scale.ScaleModes.FIT,
+        autoCenter: Phaser.Scale.Center.CENTER_BOTH
+    },
     parent: "game",
     resolution: window.devicePixelRatio,
+     // @ts-ignore Issue with Typescript definitions in Phaser 3.17.0
     scene: [BootScene, StartScene, GameScene, EndScene],
+
     input: {
         keyboard: true
     },
+    //audio
+    audio: 
+    {
+        disableWebAudio: true
+    },
+
     physics: {
         default: "arcade",
         arcade: {
@@ -24,7 +35,7 @@ const config: GameConfig = {
 };
 
 export class Game extends Phaser.Game {
-    constructor(config: GameConfig) {
+    constructor(config: Phaser.Types.Core.GameConfig) {
         super(config)
     }
 }

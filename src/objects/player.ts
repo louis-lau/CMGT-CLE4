@@ -1,6 +1,6 @@
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
-    private cursors: Phaser.Input.Keyboard.CursorKeys
+    private cursors: Phaser.Types.Input.Keyboard.CursorKeys
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon")
