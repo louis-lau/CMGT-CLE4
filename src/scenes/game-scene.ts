@@ -52,11 +52,8 @@ export class GameScene extends Phaser.Scene {
         )
 
         for (const food of foods) {
-      
             this.physics.add.existing(food)
             this.physics.add.overlap(this.player, food, this.collectFood, null, this)
-        
-        
         }
 
         let obstacles= []
@@ -66,12 +63,8 @@ export class GameScene extends Phaser.Scene {
         )
 
         for (const obstacle of obstacles) {
-            // obstacle.width = obstacle.displayWidth
-            // obstacle.height = obstacle.displayHeight
             this.physics.add.existing(obstacle)
             this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this)
-            // console.log(obstacle.body)
-            // console.log(obstacle)
         }
 
         // Set camera bounds and start following
@@ -79,13 +72,15 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, true, undefined, undefined, -175)
     }
     
-    private collectFood(){
-        this.player.accelerate()        
+    private collectFood(player: Player, food: Phaser.Physics.Arcade.Sprite){
+        food.destroy()
+        this.player.accelerate()
     }
 
-    private getDamage(){
-       this.player.lives--
-       console.log("au!")
+    private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite){
+        obstacle.destroy()
+        this.player.lives--
+        console.log("au!")
     }
     
     update(){
