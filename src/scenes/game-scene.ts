@@ -57,8 +57,7 @@ export class GameScene extends Phaser.Scene {
     }
     
     private collectFood(){
-        this.player.accelerate()
-        
+        this.player.accelerate()        
     }
     
     update(){

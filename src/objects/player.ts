@@ -13,6 +13,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true)
         this.setBounce(0.2)
         this.setDragY(600)
+        this.setDragX(20)
         this.setVelocityX(200)
     }
 
@@ -23,12 +24,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         } else if (this.cursors.down.isDown) {
             this.setVelocityY(200)
         }
-
-        if (this.body.velocity.x >200) {
-        this.slowDown()
-        } else if (this.body.velocity.x <=200) {
-            this.body.velocity.x= 200
-        }
     } 
 
     public accelerate() {
@@ -36,11 +31,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.body.velocity.x+= 20
         }
     }    
-        
-    public slowDown() {
-            this.setDragX(20)
-        }
-    }
     
         // jump when the body is touching the floor
         /*
