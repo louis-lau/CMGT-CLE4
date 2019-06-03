@@ -49,12 +49,26 @@ export class GameScene extends Phaser.Scene {
         )
 
         for (const food of foods) {
-            // food.width = food.displayWidth
-            // food.height = food.displayHeight
+      
             this.physics.add.existing(food)
             this.physics.add.overlap(this.player, food, this.collectFood, null, this)
-            // console.log(food.body)
-            // console.log(food)
+        
+        
+        }
+
+        let obstacles= []
+        obstacles = obstacles.concat(
+            map.createFromObjects("Obstacles", 3, {key: "cola-can"}),
+            map.createFromObjects("Obstacles", 1, {key: "alcohol"})
+        )
+
+        for (const obstacle of obstacles) {
+            // obstacle.width = obstacle.displayWidth
+            // obstacle.height = obstacle.displayHeight
+            this.physics.add.existing(obstacle)
+            this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this)
+            // console.log(obstacle.body)
+            // console.log(obstacle)
         }
 
         // Set camera bounds and start following
@@ -64,6 +78,11 @@ export class GameScene extends Phaser.Scene {
     
     private collectFood(){
         console.log("JE HEBT EEN FRIETJE GEGETEN JIJ DIKZAK!")
+    }
+
+    private getDamage(){
+       this.player.lives--
+       console.log("au!")
     }
     
     update(){

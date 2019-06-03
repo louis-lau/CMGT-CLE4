@@ -1,6 +1,9 @@
+import { GameScene } from "../scenes/game-scene";
+
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys
+    public lives = 3
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon")
@@ -14,9 +17,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.setBounce(0.2)
         this.setDragY(600)
         this.setVelocityX(200)
+        
+        
+        
     }
-
+    
+    
     public update(): void {
+        
         
         if (this.cursors.up.isDown) {
             this.setVelocityY(-200)
@@ -24,7 +32,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(200)
         } 
         
-
+        if (this.lives == 0) {
+            this.scene.scene.start("EndScene");
+        }
+        
         // jump when the body is touching the floor
         /*
         let grounded = this.body.touching.down 
