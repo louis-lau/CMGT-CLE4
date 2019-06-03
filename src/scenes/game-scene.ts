@@ -80,7 +80,6 @@ export class GameScene extends Phaser.Scene {
     private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite){
         obstacle.destroy()
         this.player.lives--
-        console.log("au!")
     }
     
     update(){
@@ -89,7 +88,6 @@ export class GameScene extends Phaser.Scene {
         for (const backgroundLayer of this.backgroundLayers) {
             backgroundLayer.update(this.player.body.velocity.x)
         }
-        console.log(this.player.body.velocity.x)
     }
 
 }
