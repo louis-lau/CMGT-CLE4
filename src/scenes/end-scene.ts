@@ -16,8 +16,9 @@ export class EndScene extends Phaser.Scene {
         //this.add.image(0, 0, 'sky').setOrigin(0, 0)
 
         this.add.text(245, 130, 'GAME OVER', { fontFamily: 'Arial Black', fontSize: 60, color: 'red' }).setOrigin(0.5).setStroke('black', 3)
+        this.add.text(245, 170, 'Click to start again', { fontFamily: 'Arial Black', fontSize: 20, color: 'red' }).setOrigin(0.5).setStroke('black', 1)
 
-
-        // add code here to switch to the GameScene, after a mouse click
+        this.input.once(`pointerdown`, () => {
+            this.scene.start(`GameScene`)
     }
 }
