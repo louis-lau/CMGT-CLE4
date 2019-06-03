@@ -21,6 +21,9 @@ export class GameScene extends Phaser.Scene {
         // Create background music from loaded audio files and play
         const music = this.sound.add('spacetheme', {loop: true});
         music.play();
+        this.events.on('shutdown', function(){
+            music.stop()
+        });
 
             
        
