@@ -80,7 +80,7 @@ export class GameScene extends Phaser.Scene {
     }
     
     private collectFood(){
-        console.log("JE HEBT EEN FRIETJE GEGETEN JIJ DIKZAK!")
+        this.player.accelerate()        
     }
 
     private getDamage(){
@@ -94,6 +94,7 @@ export class GameScene extends Phaser.Scene {
         for (const backgroundLayer of this.backgroundLayers) {
             backgroundLayer.update(this.player.body.velocity.x)
         }
+        console.log(this.player.body.velocity.x)
     }
 
 }
