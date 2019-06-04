@@ -1,8 +1,8 @@
 import "phaser";
-import { BootScene } from "./scenes/boot-scene"
-import { StartScene } from "./scenes/start-scene"
-import { GameScene } from "./scenes/game-scene"
-import { EndScene } from "./scenes/end-scene"
+import { BootScene } from "./scenes/boot-scene";
+import { StartScene } from "./scenes/start-scene";
+import { GameScene } from "./scenes/game-scene";
+import { EndScene } from "./scenes/end-scene";
 
 const config: Phaser.Types.Core.GameConfig = {
     width: 480,
@@ -13,22 +13,21 @@ const config: Phaser.Types.Core.GameConfig = {
     },
     parent: "game",
     resolution: window.devicePixelRatio,
-     // @ts-ignore Issue with Typescript definitions in Phaser 3.17.0
+    // @ts-ignore Issue with Typescript definitions in Phaser 3.17.0
     scene: [BootScene, StartScene, GameScene, EndScene],
 
     input: {
         keyboard: true
     },
     //audio
-    audio: 
-    {
+    audio: {
         disableWebAudio: true
     },
 
     physics: {
         default: "arcade",
         arcade: {
-            debug: true, 
+            debug: true
         }
     },
     render: { pixelArt: true }
@@ -36,9 +35,8 @@ const config: Phaser.Types.Core.GameConfig = {
 
 export class Game extends Phaser.Game {
     constructor(config: Phaser.Types.Core.GameConfig) {
-        super(config)
+        super(config);
     }
 }
 
-window.addEventListener("load", () => new Game(config))
-
+window.addEventListener("load", () => new Game(config));
