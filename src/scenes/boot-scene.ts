@@ -24,6 +24,9 @@ export class BootScene extends Phaser.Scene {
 
         //audio files
         this.load.audio("spacetheme", [require("../assets/audio/spacetheme.mp3"), require("../assets/audio/spacetheme.ogg")]);
+        this.load.audio("chew", require("../assets/audio/Bite.mp3"));
+        this.load.audio("roekoe", require("../assets/audio/Squawk.mp3"));
+
 
         this.load.on("complete", () => {
             console.log("everything is loaded");
