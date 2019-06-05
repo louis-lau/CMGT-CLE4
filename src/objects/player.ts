@@ -1,3 +1,5 @@
+import { Scale } from "phaser";
+
 export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     public lives = 3;
@@ -15,6 +17,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.setDragY(600);
         this.setDragX(20);
         this.setVelocityX(200);
+        this.createShit();
     }
 
     public update(): void {
@@ -33,6 +36,53 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.body.velocity.x <= 700) {
             this.body.velocity.x += 20;
         }
+    }
+
+    private createShit() {
+        let whiteShit = this.scene.add.particles("white-shit");
+        let whiteShitEmitter = whiteShit.createEmitter({
+            x: -18,
+            y: 0,
+            scale: { ease: "linear", min: 1, max: 1.5 },
+            lifespan: 2000,
+            speed: 0,
+            angle: { min: 160, max: 200 },
+            gravityY: 300,
+            quantity: 2,
+            blendMode: "NORMAL"
+        });
+
+        let greenShit = this.scene.add.particles("green-shit");
+        let greenShitEmitter = greenShit.createEmitter({
+            x: -18,
+            y: 0,
+            scale: { ease: "linear", min: 1, max: 1.5 },
+            lifespan: 2000,
+            speed: 0,
+            angle: { min: 160, max: 200 },
+            gravityY: 300,
+            quantity: 2,
+            blendMode: "NORMAL",
+            frequency: 1000
+        });
+
+        let greenShit2 = this.scene.add.particles("green-shit");
+        let greenShit2Emitter = greenShit2.createEmitter({
+            x: -18,
+            y: 0,
+            scale: { ease: "linear", min: 1, max: 1.5 },
+            lifespan: 2000,
+            speed: 0,
+            angle: { min: 160, max: 200 },
+            gravityY: 300,
+            quantity: 2,
+            blendMode: "NORMAL",
+            frequency: 1000
+        });
+
+        greenShitEmitter.startFollow(this);
+        greenShit2Emitter.startFollow(this);
+        whiteShitEmitter.startFollow(this);
     }
 
     // jump when the body is touching the floor
