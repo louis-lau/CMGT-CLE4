@@ -77,7 +77,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             gravityY: 300,
             quantity: 2,
             blendMode: "NORMAL",
-            frequency: 1000
+            frequency: 600
         });
 
         greenShitEmitter.startFollow(this);

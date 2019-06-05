@@ -9,7 +9,9 @@ export class BootScene extends Phaser.Scene {
         this.load.image("green-shit", require("../assets/img/green-shit.png"));
         this.load.image("parrot-pigeon", require("../assets/img/parrot-pigeon.png"));
         this.load.image("pigeon", require("../assets/img/pigeon.png"));
+        this.load.image("flappybird", require("../assets/img/flappybird.png"));
         this.load.image("rasta-pigeon", require("../assets/img/rasta-pigeon.png"));
+        this.load.image("white-dove", require("../assets/img/whitedove.png"))
         this.load.image("white-shit", require("../assets/img/white-shit.png"));
         this.load.image("city-sky", require("../assets/img/city-sky.png"));
         this.load.image("flat", require("../assets/img/flat.png"));
