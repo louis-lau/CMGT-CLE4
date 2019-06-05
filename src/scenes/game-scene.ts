@@ -36,7 +36,11 @@ export class GameScene extends Phaser.Scene {
         this.player = new Player(this);
 
         let foods = [];
-        foods = foods.concat(map.createFromObjects("Food", 2, { key: "chocolate" }), map.createFromObjects("Food", 5, { key: "fry" }));
+        foods = foods.concat(
+            map.createFromObjects("Food", 2, { key: "chocolate" }),
+            map.createFromObjects("Food", 5, { key: "fry" }),
+            map.createFromObjects("Food", 4, { key: "fries" })
+        );
 
         for (const food of foods) {
             this.physics.add.existing(food);
