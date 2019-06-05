@@ -19,6 +19,10 @@ export class GameScene extends Phaser.Scene {
             music.stop();
         });
 
+        //soundeffects
+        this.sound.add("chew");
+        this.sound.add("roekoe");
+
         // Create map and tileset from loaded json and image
         const map = this.make.tilemap({ key: "map-city" });
 
@@ -36,7 +40,11 @@ export class GameScene extends Phaser.Scene {
         this.player = new Player(this);
 
         let foods = [];
-        foods = foods.concat(map.createFromObjects("Food", 2, { key: "chocolate" }), map.createFromObjects("Food", 5, { key: "fry" }));
+        foods = foods.concat(
+            map.createFromObjects("Food", 2, { key: "chocolate" }),
+            map.createFromObjects("Food", 5, { key: "fry" }),
+            map.createFromObjects("Food", 4, { key: "fries" })
+        );
 
         for (const food of foods) {
             this.physics.add.existing(food);
@@ -54,6 +62,11 @@ export class GameScene extends Phaser.Scene {
             this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this);
         }
 
+        let finishline = map.createFromObjects("Finish", 7, { key: "finishline" })[0]
+        console.log(finishline)
+        this.physics.add.existing(finishline);
+        this.physics.add.overlap(this.player, finishline, this.finish, null, this);
+
         // Set camera bounds and start following
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player, true, undefined, undefined, -175);
@@ -62,11 +75,17 @@ export class GameScene extends Phaser.Scene {
     private collectFood(player: Player, food: Phaser.Physics.Arcade.Sprite) {
         food.destroy();
         this.player.accelerate();
+        this.sound.play("chew");
     }
 
     private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         this.player.lives--;
+        this.sound.play("roekoe");
+    }
+
+    private finish() {
+        this.scene.start("FinishScene");
     }
 
     update() {

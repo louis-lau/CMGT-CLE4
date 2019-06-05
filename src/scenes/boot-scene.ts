@@ -21,10 +21,15 @@ export class BootScene extends Phaser.Scene {
         this.load.image("cola-can", require("../assets/img/cola-can.png"));
         this.load.image("fries", require("../assets/img/fries.png"));
         this.load.image("fry", require("../assets/img/fry.png"));
+        this.load.image("finishline", require("../assets/img/finishline.png"));
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"));
 
         //audio files
         this.load.audio("spacetheme", [require("../assets/audio/spacetheme.mp3"), require("../assets/audio/spacetheme.ogg")]);
+        this.load.audio("party", [require("../assets/audio/party.mp3")]);
+        this.load.audio("chew", require("../assets/audio/Bite.mp3"));
+        this.load.audio("roekoe", require("../assets/audio/Squawk.mp3"));
+
 
         this.load.on("complete", () => {
             console.log("everything is loaded");
