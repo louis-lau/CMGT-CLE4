@@ -1882,9 +1882,32 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Finish",
+         "objects":[
+                {
+                 "gid":7,
+                 "height":310,
+                 "id":208,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":4354.66666666667,
+                 "y":299
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":207,
+ "nextlayerid":6,
+ "nextobjectid":209,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -1902,8 +1925,8 @@
          "margin":0,
          "name":"img",
          "spacing":0,
-         "tilecount":5,
-         "tileheight":44,
+         "tilecount":6,
+         "tileheight":310,
          "tiles":[
                 {
                  "id":0,
@@ -1934,11 +1957,17 @@
                  "image":"..\/img\/fry.png",
                  "imageheight":21,
                  "imagewidth":19
+                }, 
+                {
+                 "id":6,
+                 "image":"..\/img\/finishline.png",
+                 "imageheight":310,
+                 "imagewidth":40
                 }],
-         "tilewidth":26
+         "tilewidth":40
         }],
  "tilewidth":32,
  "type":"map",
  "version":1.2,
- "width":150
+ "width":140
 }
