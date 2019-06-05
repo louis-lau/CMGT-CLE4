@@ -19,6 +19,10 @@ export class GameScene extends Phaser.Scene {
             music.stop();
         });
 
+        //soundeffects
+        this.sound.add("chew");
+        this.sound.add("roekoe");
+
         // Create map and tileset from loaded json and image
         const map = this.make.tilemap({ key: "map-city" });
 
@@ -71,11 +75,13 @@ export class GameScene extends Phaser.Scene {
     private collectFood(player: Player, food: Phaser.Physics.Arcade.Sprite) {
         food.destroy();
         this.player.accelerate();
+        this.sound.play("chew");
     }
 
     private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         this.player.lives--;
+        this.sound.play("roekoe");
     }
 
     private finish() {
