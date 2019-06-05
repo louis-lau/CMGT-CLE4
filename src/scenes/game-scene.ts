@@ -58,6 +58,11 @@ export class GameScene extends Phaser.Scene {
             this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this);
         }
 
+        let finishline = map.createFromObjects("Finish", 7, { key: "finishline" })[0]
+        console.log(finishline)
+        this.physics.add.existing(finishline);
+        this.physics.add.overlap(this.player, finishline, this.finish, null, this);
+
         // Set camera bounds and start following
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player, true, undefined, undefined, -175);
@@ -70,7 +75,11 @@ export class GameScene extends Phaser.Scene {
 
     private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
-        this.player.lives--;
+        // this.player.lives--;
+    }
+
+    private finish() {
+        this.scene.start("FinishScene");
     }
 
     update() {

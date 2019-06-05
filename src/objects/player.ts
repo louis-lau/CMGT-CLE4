@@ -18,9 +18,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     public update(): void {
-        if (this.cursors.up.isDown) {
+        if (this.cursors.left.isDown) {
             this.setVelocityY(-200);
-        } else if (this.cursors.down.isDown) {
+        } else if (this.cursors.right.isDown) {
             this.setVelocityY(200);
         }
 
