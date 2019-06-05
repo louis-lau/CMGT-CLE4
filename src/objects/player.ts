@@ -27,7 +27,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(200);
         }
 
-        if (this.lives == 0) {
+        if (this.lives < 1) {
             this.scene.scene.start("EndScene");
         }
     }
@@ -84,6 +84,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         greenShit2Emitter.startFollow(this);
         whiteShitEmitter.startFollow(this);
     }
+
+
+
+
+
+
 
     // jump when the body is touching the floor
     /*
