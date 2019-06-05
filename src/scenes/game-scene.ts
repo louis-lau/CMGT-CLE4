@@ -32,8 +32,8 @@ export class GameScene extends Phaser.Scene {
         // Add background layers with parallax effect
         this.backgroundLayers.push(
             new BackgroundLayer(this, "city-sky"),
-            new BackgroundLayer(this, "house1", 232, 2),
-            new BackgroundLayer(this, "house2", 200, 1.5)
+            new BackgroundLayer(this, "house1", 232, 2.5),
+            new BackgroundLayer(this, "house2", 200, 2),
             new BackgroundLayer(this, "house3", 223, 1.5)
         );
 
