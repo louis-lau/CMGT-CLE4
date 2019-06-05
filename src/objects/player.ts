@@ -5,7 +5,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     public lives = 3;
 
     constructor(scene) {
-        super(scene, 50, 135, "pigeon");
+        super(scene, 50, 135, "flappybird");
 
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
