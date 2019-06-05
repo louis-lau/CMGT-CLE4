@@ -8,18 +8,18 @@ export class StartScene extends Phaser.Scene {
     preload(): void {}
 
     create(): void {
-        // this.add.image(0, 0, 'pigeon').setOrigin(0, 0)
-
-        // add another image here
-
-        // add text here
-
-        // this.add.text(400, 300, 'MY GAME TITLE', { fontFamily: 'Arial Black', fontSize: 70, color: '#2ac9be' }).setOrigin(0.5).setStroke('#7df2ea', 16)
-
-        // add code here to switch to the GameScene, after a mouse click
+        this.add
+            .text(245, 130, "Schijt Duif", { fontFamily: "Arial Black", fontSize: 60, color: "white" })
+            .setOrigin(0.5)
+            .setStroke("black", 3);
+        this.add
+            .text(245, 180, "Click to start", { fontFamily: "Arial Black", fontSize: 20, color: "white" })
+            .setOrigin(0.5)
+            .setStroke("black", 1);
 
         this.input.once("pointerdown", pointer => {
             this.scene.start("GameScene");
         });
     }
 }
+      
