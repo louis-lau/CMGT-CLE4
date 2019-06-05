@@ -75,7 +75,7 @@ export class GameScene extends Phaser.Scene {
 
     private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
-        // this.player.lives--;
+        this.player.lives--;
     }
 
     private finish() {
