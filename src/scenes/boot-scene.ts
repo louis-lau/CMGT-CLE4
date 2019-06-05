@@ -15,6 +15,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image("flat", require("../assets/img/flat.png"));
         this.load.image("house1", require("../assets/img/house1.png"));
         this.load.image("house2", require("../assets/img/house2.png"));
+        this.load.image("house3", require("../assets/img/house3.png"));
         this.load.image("alcohol", require("../assets/img/alcohol.png"));
         this.load.image("chocolate", require("../assets/img/chocolate.png"));
         this.load.image("cola-can", require("../assets/img/cola-can.png"));
