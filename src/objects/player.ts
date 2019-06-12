@@ -2,10 +2,10 @@ import { Scale } from "phaser";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-    public lives = 3;
+    public lives = 3;    
 
     constructor(scene) {
-        super(scene, 50, 135, "flappybird");
+        super(scene, 50, 135, "pigeon");
 
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -84,18 +84,4 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         greenShit2Emitter.startFollow(this);
         whiteShitEmitter.startFollow(this);
     }
-
-
-
-
-
-
-
-    // jump when the body is touching the floor
-    /*
-        let grounded = this.body.touching.down 
-        if (this.cursors.up.isDown && grounded) {
-            this.setVelocityY(-400)
-        }
-        */
 }

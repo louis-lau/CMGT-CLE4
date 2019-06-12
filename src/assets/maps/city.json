@@ -81,30 +81,6 @@
                 {
                  "gid":4,
                  "height":34,
-                 "id":60,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":18,
-                 "x":1651,
-                 "y":-124
-                }, 
-                {
-                 "gid":4,
-                 "height":34,
-                 "id":61,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":18,
-                 "x":1648,
-                 "y":-55.3333333333333
-                }, 
-                {
-                 "gid":4,
-                 "height":34,
                  "id":62,
                  "name":"",
                  "rotation":0,
@@ -257,18 +233,6 @@
                  "width":18,
                  "x":2155,
                  "y":65
-                }, 
-                {
-                 "gid":4,
-                 "height":34,
-                 "id":90,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":18,
-                 "x":1627,
-                 "y":-101.666666666667
                 }, 
                 {
                  "gid":4,
@@ -449,6 +413,53 @@
                  "width":26,
                  "x":2603,
                  "y":152.666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"Lives",
+         "objects":[
+                {
+                 "gid":8,
+                 "height":18,
+                 "id":212,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":20,
+                 "y":23
+                }, 
+                {
+                 "gid":8,
+                 "height":18,
+                 "id":213,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":44.3333333333333,
+                 "y":23
+                }, 
+                {
+                 "gid":8,
+                 "height":18,
+                 "id":214,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":68.3333333333333,
+                 "y":23
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1906,8 +1917,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":209,
+ "nextlayerid":7,
+ "nextobjectid":215,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -1925,7 +1936,7 @@
          "margin":0,
          "name":"img",
          "spacing":0,
-         "tilecount":6,
+         "tilecount":7,
          "tileheight":310,
          "tiles":[
                 {
@@ -1963,6 +1974,12 @@
                  "image":"..\/img\/finishline.png",
                  "imageheight":310,
                  "imagewidth":40
+                }, 
+                {
+                 "id":7,
+                 "image":"..\/img\/heart.png",
+                 "imageheight":18,
+                 "imagewidth":22
                 }],
          "tilewidth":40
         }],

@@ -1,12 +1,12 @@
 import { Player } from "../objects/player";
 import { BackgroundLayer } from "../objects/background-layer";
 
-export class GameScene extends Phaser.Scene {
+export class GameScene2 extends Phaser.Scene {
     private player: Player;
     private backgroundLayers: Array<BackgroundLayer> = [];
 
     constructor() {
-        super({ key: "GameScene" });
+        super({ key: "GameScene2" });
     }
 
     init(): void {}
@@ -32,9 +32,9 @@ export class GameScene extends Phaser.Scene {
         // Add background layers with parallax effect
         this.backgroundLayers.push(
             new BackgroundLayer(this, "city-sky"),
-            new BackgroundLayer(this, "house1", 232, 2.5),
-            new BackgroundLayer(this, "house2", 200, 2),
-            new BackgroundLayer(this, "house3", 223, 1.5)
+            new BackgroundLayer(this, "flat3", 0, 2.5),
+            new BackgroundLayer(this, "flat", 115, 2),
+            new BackgroundLayer(this, "flat2", 223, 1.5)
         );
 
         this.player = new Player(this);
@@ -85,7 +85,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     private finish() {
-        this.scene.start("GameScene2");
+        this.scene.start("FinishScene");
     }
 
     update() {
