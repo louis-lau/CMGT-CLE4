@@ -25,8 +25,10 @@ export class BootScene extends Phaser.Scene {
         this.load.image("cola-can", require("../assets/img/cola-can.png"));
         this.load.image("fries", require("../assets/img/fries.png"));
         this.load.image("fry", require("../assets/img/fry.png"));
+        this.load.image("sigaret", require("../assets/img/peuk.png"))
         this.load.image("finishline", require("../assets/img/finishline.png"));
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"));
+        this.load.tilemapTiledJSON("map-city2", require("../assets/maps/city2.json"));
 
         //audio files
         this.load.audio("spacetheme", [require("../assets/audio/spacetheme.mp3"), require("../assets/audio/spacetheme.ogg")]);
