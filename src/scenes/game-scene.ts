@@ -1,5 +1,6 @@
 import { Player } from "../objects/player";
 import { BackgroundLayer } from "../objects/background-layer";
+import { UIScene } from "../scenes/ui-scene"
 
 export class GameScene extends Phaser.Scene {
     private player: Player;
@@ -13,6 +14,8 @@ export class GameScene extends Phaser.Scene {
     init(): void {}
 
     create(): void {
+        this.scene.add("UIScene", new UIScene("UIScene"), true)
+
         // Create background music from loaded audio files and play
         const music = this.sound.add("spacetheme", { loop: true });
         music.play();
@@ -76,12 +79,14 @@ export class GameScene extends Phaser.Scene {
         food.destroy();
         this.player.accelerate();
         this.sound.play("chew");
+        this.registry.values.score += 100
     }
 
     private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         this.player.lives--;
         this.sound.play("roekoe");
+        this.registry.values.score -= 600
     }
 
     private destroyOb(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
@@ -92,6 +97,11 @@ export class GameScene extends Phaser.Scene {
     }
 
     update() {
+        this.registry.values.score += this.player.body.velocity.x/100
+        if (this.registry.values.score < 0) {
+            this.registry.values.score = 0
+        }
+
         this.player.update();
         // Call update function for all backgroundlayers
         for (const backgroundLayer of this.backgroundLayers) {

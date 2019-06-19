@@ -5,6 +5,7 @@ import { GameScene } from "./scenes/game-scene";
 import { GameScene2 } from "./scenes/game-scene2";
 import { EndScene } from "./scenes/end-scene";
 import { FinishScene } from "./scenes/finish-scene";
+import { UIScene } from "./scenes/ui-scene"
 
 const config: Phaser.Types.Core.GameConfig = {
     width: 480,
@@ -16,7 +17,7 @@ const config: Phaser.Types.Core.GameConfig = {
     parent: "game",
     resolution: window.devicePixelRatio,
     // @ts-ignore Issue with Typescript definitions in Phaser 3.17.0
-    scene: [BootScene, StartScene, GameScene, GameScene2, EndScene, FinishScene],
+    scene: [BootScene, StartScene, GameScene, GameScene2, EndScene, FinishScene, UIScene],
 
     input: {
         keyboard: true
