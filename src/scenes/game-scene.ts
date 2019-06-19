@@ -89,8 +89,11 @@ export class GameScene extends Phaser.Scene {
         this.registry.values.score -= 600
     }
 
-    private destroyOb(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
-        obstacle.destroy(); }
+    private destroyOb(corn : Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
+        obstacle.destroy();
+        corn.destroy();
+        this.registry.values.score += 90
+    }
 
     private finish() {
         this.scene.start("GameScene2");

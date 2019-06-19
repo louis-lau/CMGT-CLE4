@@ -41,7 +41,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.loadShoot = 0
         }
    
-        if (this.lives < 0) {
+        if (this.lives < 0 || this.body.velocity.x <= 0) {
             this.scene.scene.start("EndScene");
         }
     }

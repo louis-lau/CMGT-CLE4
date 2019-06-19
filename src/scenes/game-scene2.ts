@@ -84,8 +84,10 @@ export class GameScene2 extends Phaser.Scene {
         this.sound.play("roekoe");
     }
 
-    private destroyOb(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
-        obstacle.destroy(); }
+    private destroyOb(corn : Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
+        obstacle.destroy();
+        corn.destroy();
+    }
 
     private finish() {
         this.scene.start("FinishScene");
