@@ -6,9 +6,10 @@ export class GameScene extends Phaser.Scene {
     private player: Player;
     private backgroundLayers: Array<BackgroundLayer> = [];
     private obstacles = [];
+    private foods = [];
 
-    constructor() {
-        super({ key: "GameScene" });
+    constructor(config: Phaser.Types.Scenes.SettingsConfig) {
+        super(config);
     }
 
     init(): void {}
@@ -18,7 +19,7 @@ export class GameScene extends Phaser.Scene {
 
         // Create background music from loaded audio files and play
         const music = this.sound.add("spacetheme", { loop: true });
-        music.play();
+        // music.play();
         this.events.on("shutdown", function() {
             music.stop();
         });
@@ -43,26 +44,23 @@ export class GameScene extends Phaser.Scene {
 
         this.player = new Player(this);
 
-        let foods = [];
-        foods = foods.concat(
+        this.foods = this.foods.concat(
             map.createFromObjects("Food", 2, { key: "chocolate" }),
             map.createFromObjects("Food", 5, { key: "fry" }),
             map.createFromObjects("Food", 4, { key: "fries" })
         );
-
-        for (const food of foods) {
-            this.physics.add.existing(food);
-            this.physics.add.overlap(this.player, food, this.collectFood, null, this);
-        }
-
         this.obstacles = this.obstacles.concat(
             map.createFromObjects("Obstacles", 3, { key: "cola-can" }),
             map.createFromObjects("Obstacles", 1, { key: "alcohol" })
         );
 
+        for (const food of this.foods) {
+            this.physics.add.existing(food);
+            this.physics.add.overlap(this.player, food, this.collectFood, null, this);
+        }
         for (const obstacle of this.obstacles) {
             this.physics.add.existing(obstacle);
-            this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this);
+            this.physics.add.overlap(this.player, obstacle, this.takeDamage, null, this);
         }
 
         let finishline = map.createFromObjects("Finish", 7, { key: "finishline" })[0]
@@ -82,7 +80,7 @@ export class GameScene extends Phaser.Scene {
         this.registry.values.score += 100
     }
 
-    private getDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
+    private takeDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         this.player.lives--;
         this.sound.play("roekoe");
@@ -111,10 +109,8 @@ export class GameScene extends Phaser.Scene {
             backgroundLayer.update(this.player.body.velocity.x);
         }
         
-        //console.log(this.player.corn);
         if (this.player.corn){
             for (const obstacle of this.obstacles) {
-            
                 this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this);
             }
         }
