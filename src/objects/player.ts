@@ -2,7 +2,7 @@ import { Scale } from "phaser";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-    public lives = 3;    
+    public lives = 3;
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon");
