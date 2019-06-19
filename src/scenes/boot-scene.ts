@@ -15,6 +15,8 @@ export class BootScene extends Phaser.Scene {
         this.load.image("white-shit", require("../assets/img/white-shit.png"));
         this.load.image("city-sky", require("../assets/img/city-sky.png"));
         this.load.image("flat", require("../assets/img/flat.png"));
+        this.load.image("flat2", require("../assets/img/flat2.png"));
+        this.load.image("flat3", require("../assets/img/flat3.png"));
         this.load.image("house1", require("../assets/img/house1.png"));
         this.load.image("house2", require("../assets/img/house2.png"));
         this.load.image("house3", require("../assets/img/house3.png"));
@@ -23,9 +25,11 @@ export class BootScene extends Phaser.Scene {
         this.load.image("cola-can", require("../assets/img/cola-can.png"));
         this.load.image("fries", require("../assets/img/fries.png"));
         this.load.image("fry", require("../assets/img/fry.png"));
+        this.load.image("sigaret", require("../assets/img/peuk.png"))
         this.load.image("finishline", require("../assets/img/finishline.png"));
         this.load.image("corn", require("../assets/img/corn.png"));
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"));
+        this.load.tilemapTiledJSON("map-city2", require("../assets/maps/city2.json"));
 
         //audio files
         this.load.audio("spacetheme", [require("../assets/audio/spacetheme.mp3"), require("../assets/audio/spacetheme.ogg")]);

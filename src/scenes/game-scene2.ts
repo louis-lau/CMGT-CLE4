@@ -1,12 +1,12 @@
 import { Player } from "../objects/player";
 import { BackgroundLayer } from "../objects/background-layer";
 
-export class GameScene extends Phaser.Scene {
+export class GameScene2 extends Phaser.Scene {
     private player: Player;
     private backgroundLayers: Array<BackgroundLayer> = [];
 
     constructor() {
-        super({ key: "GameScene" });
+        super({ key: "GameScene2" });
     }
 
     init(): void {}
@@ -24,7 +24,7 @@ export class GameScene extends Phaser.Scene {
         this.sound.add("roekoe");
 
         // Create map and tileset from loaded json and image
-        const map = this.make.tilemap({ key: "map-city" });
+        const map = this.make.tilemap({ key: "map-city2" });
 
         // Set bounds width to the width of the loaded map
         this.physics.world.bounds.width = map.widthInPixels;
@@ -32,16 +32,16 @@ export class GameScene extends Phaser.Scene {
         // Add background layers with parallax effect
         this.backgroundLayers.push(
             new BackgroundLayer(this, "city-sky"),
-            new BackgroundLayer(this, "house1", 232, 2.5),
-            new BackgroundLayer(this, "house2", 200, 2),
-            new BackgroundLayer(this, "house3", 223, 1.5)
+            new BackgroundLayer(this, "flat3", 0, 2.5),
+            new BackgroundLayer(this, "flat", 115, 2),
+            new BackgroundLayer(this, "flat2", 223, 1.5)
         );
 
         this.player = new Player(this);
 
         let foods = [];
         foods = foods.concat(
-            map.createFromObjects("Food", 2, { key: "chocolate" }),
+            map.createFromObjects("Food", 1, { key: "chocolate" }),
             map.createFromObjects("Food", 5, { key: "fry" }),
             map.createFromObjects("Food", 4, { key: "fries" })
         );
@@ -53,8 +53,9 @@ export class GameScene extends Phaser.Scene {
 
         let obstacles = [];
         obstacles = obstacles.concat(
-            map.createFromObjects("Obstacles", 3, { key: "cola-can" }),
-            map.createFromObjects("Obstacles", 1, { key: "alcohol" })
+            map.createFromObjects("Obstacles", 2, { key: "cola-can" }),
+            map.createFromObjects("Obstacles", 3, { key: "alcohol" }),
+            map.createFromObjects("Obstacles", 7, { key: "sigaret" })
         );
 
         for (const obstacle of obstacles) {
@@ -62,8 +63,7 @@ export class GameScene extends Phaser.Scene {
             this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this);
         }
 
-        let finishline = map.createFromObjects("Finish", 7, { key: "finishline" })[0]
-        console.log(finishline)
+        let finishline = map.createFromObjects("Finish", 8, { key: "finishline" })[0]
         this.physics.add.existing(finishline);
         this.physics.add.overlap(this.player, finishline, this.finish, null, this);
 
@@ -85,7 +85,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     private finish() {
-        this.scene.start("GameScene2");
+        this.scene.start("FinishScene");
     }
 
     update() {

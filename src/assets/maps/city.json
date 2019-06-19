@@ -482,6 +482,53 @@
         }, 
         {
          "draworder":"topdown",
+         "id":6,
+         "name":"Lives",
+         "objects":[
+                {
+                 "gid":8,
+                 "height":18,
+                 "id":212,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":20,
+                 "y":23
+                }, 
+                {
+                 "gid":8,
+                 "height":18,
+                 "id":213,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":44.3333333333333,
+                 "y":23
+                }, 
+                {
+                 "gid":8,
+                 "height":18,
+                 "id":214,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":22,
+                 "x":68.3333333333333,
+                 "y":23
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":4,
          "name":"Obstacles",
          "objects":[
@@ -2621,7 +2668,7 @@
          "margin":0,
          "name":"img",
          "spacing":0,
-         "tilecount":6,
+         "tilecount":7,
          "tileheight":310,
          "tiles":[
                 {
@@ -2659,6 +2706,12 @@
                  "image":"..\/img\/finishline.png",
                  "imageheight":310,
                  "imagewidth":40
+                }, 
+                {
+                 "id":7,
+                 "image":"..\/img\/heart.png",
+                 "imageheight":18,
+                 "imagewidth":22
                 }],
          "tilewidth":40
         }],
