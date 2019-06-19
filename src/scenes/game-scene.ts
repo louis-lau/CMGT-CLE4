@@ -4,6 +4,7 @@ import { BackgroundLayer } from "../objects/background-layer";
 export class GameScene extends Phaser.Scene {
     private player: Player;
     private backgroundLayers: Array<BackgroundLayer> = [];
+    private obstacles = [];
 
     constructor() {
         super({ key: "GameScene" });
@@ -51,13 +52,12 @@ export class GameScene extends Phaser.Scene {
             this.physics.add.overlap(this.player, food, this.collectFood, null, this);
         }
 
-        let obstacles = [];
-        obstacles = obstacles.concat(
+        this.obstacles = this.obstacles.concat(
             map.createFromObjects("Obstacles", 3, { key: "cola-can" }),
             map.createFromObjects("Obstacles", 1, { key: "alcohol" })
         );
 
-        for (const obstacle of obstacles) {
+        for (const obstacle of this.obstacles) {
             this.physics.add.existing(obstacle);
             this.physics.add.overlap(this.player, obstacle, this.getDamage, null, this);
         }
@@ -84,6 +84,9 @@ export class GameScene extends Phaser.Scene {
         this.sound.play("roekoe");
     }
 
+    private destroyOb(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
+        obstacle.destroy(); }
+
     private finish() {
         this.scene.start("GameScene2");
     }
@@ -94,5 +97,15 @@ export class GameScene extends Phaser.Scene {
         for (const backgroundLayer of this.backgroundLayers) {
             backgroundLayer.update(this.player.body.velocity.x);
         }
+        
+        //console.log(this.player.corn);
+        if (this.player.corn){
+            for (const obstacle of this.obstacles) {
+            
+                this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this);
+            }
+        }
+        
     }
+
 }
