@@ -2,7 +2,10 @@ import { Scale } from "phaser";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
+    //private space: Phaser.Types.Input.Keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     public lives = 3;
+    private loadShoot = 0;
+    
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon");
@@ -25,6 +28,16 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(-200);
         } else if (this.cursors.right.isDown || this.cursors.down.isDown) {
             this.setVelocityY(200);
+        }
+
+        if (this.cursors.space.isDown && this.loadShoot == 0 ) {
+            let corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn");
+            corn.setVelocityX(this.body.velocity.x + 150);
+            this.loadShoot++
+        }
+
+        if (this.cursors.space.isUp) {
+        this.loadShoot = 0
         }
 
         if (this.lives == 0) {
