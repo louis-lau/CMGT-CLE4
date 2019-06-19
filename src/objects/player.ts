@@ -39,8 +39,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.space.isUp) {
         this.loadShoot = 0
         }
-
-        if (this.lives == 0) {
+   
+        if (this.lives < 0) {
             this.scene.scene.start("EndScene");
         }
     }
