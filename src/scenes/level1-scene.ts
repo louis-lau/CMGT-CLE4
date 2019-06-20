@@ -7,6 +7,9 @@ export class Level1Scene extends GameScene {
     }
 
     create() {
+        // Reset score to 0
+        this.registry.set("score", 0);
+
         // Create map and tileset from loaded json and image
         const map = this.make.tilemap({ key: "map-city" });
 
