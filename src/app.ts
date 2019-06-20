@@ -3,7 +3,7 @@ import { BootScene } from "./scenes/boot-scene";
 import { StartScene } from "./scenes/start-scene";
 import { EndScene } from "./scenes/end-scene";
 import { FinishScene } from "./scenes/finish-scene";
-import { UIScene } from "./scenes/ui-scene"
+import { UIScene } from "./scenes/ui-scene";
 import { Level1Scene } from "./scenes/level1-scene";
 import { Level2Scene } from "./scenes/level2-scene";
 

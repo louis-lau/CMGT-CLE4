@@ -8,7 +8,7 @@ export class FinishScene extends Phaser.Scene {
     preload(): void {}
 
     create(): void {
-        this.time.delayedCall(3000, this.playMusic, [], this)
+        this.time.delayedCall(3000, this.playMusic, [], this);
 
         this.add
             .text(240, 130, "WINNER!", { fontFamily: "Arial Black", fontSize: 60, color: "yellow" })

@@ -31,11 +31,11 @@ export class GameScene extends Phaser.Scene {
         finishline: Phaser.GameObjects.Sprite,
         nextSceneKey: string
     ): void {
-        this.backgroundLayers = backgroundLayers
-        this.foods = foods
-        this.obstacles = obstacles
-        this.nextSceneKey = nextSceneKey
-        
+        this.backgroundLayers = backgroundLayers;
+        this.foods = foods;
+        this.obstacles = obstacles;
+        this.nextSceneKey = nextSceneKey;
+
         music.play();
         this.events.on("shutdown", function() {
             music.stop();
@@ -68,20 +68,20 @@ export class GameScene extends Phaser.Scene {
         food.destroy();
         this.player.accelerate();
         this.sound.play("chew");
-        this.registry.values.score += 100
+        this.registry.values.score += 100;
     }
 
     private takeDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         this.player.lives--;
         this.sound.play("roekoe");
-        this.registry.values.score -= 600
+        this.registry.values.score -= 600;
     }
 
-    private destroyOb(corn : Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
+    private destroyOb(corn: Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         corn.destroy();
-        this.registry.values.score += 90
+        this.registry.values.score += 90;
     }
 
     private finish() {
@@ -89,9 +89,9 @@ export class GameScene extends Phaser.Scene {
     }
 
     update() {
-        this.registry.values.score += this.player.body.velocity.x/100
+        this.registry.values.score += this.player.body.velocity.x / 100;
         if (this.registry.values.score < 0) {
-            this.registry.values.score = 0
+            this.registry.values.score = 0;
         }
 
         this.player.update();
@@ -99,14 +99,12 @@ export class GameScene extends Phaser.Scene {
         for (const backgroundLayer of this.backgroundLayers) {
             backgroundLayer.update(this.player.body.velocity.x);
         }
-        
+
         if (this.player.corn) {
             for (const obstacle of this.obstacles) {
                 this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this);
             }
         }
-        console.log(this.nextSceneKey)
-        
+        console.log(this.nextSceneKey);
     }
-
 }

@@ -11,7 +11,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image("pigeon", require("../assets/img/pigeon.png"));
         this.load.image("flappybird", require("../assets/img/flappybird.png"));
         this.load.image("rasta-pigeon", require("../assets/img/rasta-pigeon.png"));
-        this.load.image("white-dove", require("../assets/img/whitedove.png"))
+        this.load.image("white-dove", require("../assets/img/whitedove.png"));
         this.load.image("white-shit", require("../assets/img/white-shit.png"));
         this.load.image("city-sky", require("../assets/img/city-sky.png"));
         this.load.image("flat", require("../assets/img/flat.png"));
@@ -25,7 +25,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image("cola-can", require("../assets/img/cola-can.png"));
         this.load.image("fries", require("../assets/img/fries.png"));
         this.load.image("fry", require("../assets/img/fry.png"));
-        this.load.image("sigaret", require("../assets/img/peuk.png"))
+        this.load.image("sigaret", require("../assets/img/peuk.png"));
         this.load.image("finishline", require("../assets/img/finishline.png"));
         this.load.image("corn", require("../assets/img/corn.png"));
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"));
@@ -36,7 +36,6 @@ export class BootScene extends Phaser.Scene {
         this.load.audio("party", [require("../assets/audio/party.mp3")]);
         this.load.audio("chew", require("../assets/audio/Bite.mp3"));
         this.load.audio("roekoe", require("../assets/audio/Squawk.mp3"));
-
 
         this.load.on("complete", () => {
             console.log("everything is loaded");

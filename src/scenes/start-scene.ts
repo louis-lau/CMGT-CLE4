@@ -10,7 +10,7 @@ export class StartScene extends Phaser.Scene {
     preload(): void {}
 
     create(): void {
-        this.registry.set("score", 0)
+        this.registry.set("score", 0);
         this.add
             .text(245, 130, "Schijt Duif", { fontFamily: "Arial Black", fontSize: 60, color: "white" })
             .setOrigin(0.5)
@@ -30,4 +30,3 @@ export class StartScene extends Phaser.Scene {
         });
     }
 }
-      

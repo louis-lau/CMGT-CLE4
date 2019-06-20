@@ -3,9 +3,9 @@ import { BackgroundLayer } from "../objects/background-layer";
 
 export class Level2Scene extends GameScene {
     constructor() {
-        super({ key: "Level2Scene" })
+        super({ key: "Level2Scene" });
     }
-    
+
     create() {
         // Create map and tileset from loaded json and image
         const map = this.make.tilemap({ key: "map-city2" });
@@ -17,7 +17,7 @@ export class Level2Scene extends GameScene {
         const music = this.sound.add("spacetheme", { loop: true });
 
         // Add background layers with parallax effect
-        let backgroundLayers: Array<BackgroundLayer> = []
+        let backgroundLayers: Array<BackgroundLayer> = [];
         backgroundLayers.push(
             new BackgroundLayer(this, "city-sky"),
             new BackgroundLayer(this, "flat3", 232, 2.5),
@@ -29,8 +29,8 @@ export class Level2Scene extends GameScene {
         const finishline = map.createFromObjects("Finish", 8, { key: "finishline" })[0];
 
         // Create food and obstacle sprites and add to arrays, match textures to tiled gids
-        let foods: Array<Phaser.GameObjects.Sprite> = []
-        let obstacles: Array<Phaser.GameObjects.Sprite> = []
+        let foods: Array<Phaser.GameObjects.Sprite> = [];
+        let obstacles: Array<Phaser.GameObjects.Sprite> = [];
         foods = foods.concat(
             map.createFromObjects("Food", 1, { key: "chocolate" }),
             map.createFromObjects("Food", 5, { key: "fry" }),
@@ -42,12 +42,12 @@ export class Level2Scene extends GameScene {
             map.createFromObjects("Obstacles", 7, { key: "sigaret" })
         );
 
-        const nextSceneKey = "FinishScene"
+        const nextSceneKey = "FinishScene";
 
-        super.create(map, music, backgroundLayers, foods, obstacles, finishline, nextSceneKey)
+        super.create(map, music, backgroundLayers, foods, obstacles, finishline, nextSceneKey);
     }
 
     update() {
-        super.update()
+        super.update();
     }
 }
