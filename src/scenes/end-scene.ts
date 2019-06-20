@@ -22,7 +22,7 @@ export class EndScene extends Phaser.Scene {
             .setStroke("black", 1);
 
         this.input.once("pointerdown", pointer => {
-            this.scene.start("GameScene");
+            this.scene.start("Level1Scene");
         });
     }
 }

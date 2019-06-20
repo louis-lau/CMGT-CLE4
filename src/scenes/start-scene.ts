@@ -1,3 +1,5 @@
+import { UIScene } from "../scenes/ui-scene";
+
 export class StartScene extends Phaser.Scene {
     constructor() {
         super({ key: "StartScene" });
@@ -20,6 +22,11 @@ export class StartScene extends Phaser.Scene {
 
         this.input.once("pointerdown", pointer => {
             this.scene.start("Level1Scene");
+
+            // Only start UI scene if it's not already active
+            if (!this.scene.isActive("UIScene")) {
+                this.scene.add("UIScene", new UIScene("UIScene"), true);
+            }
         });
     }
 }
