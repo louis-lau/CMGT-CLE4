@@ -40,7 +40,7 @@ export class StartScene extends Phaser.Scene {
     
     update() {
         // console.log(this.arcade.Joysticks)
-        for (let joystick of this.arcade.Joysticks) {
+        for (let joystick of (this.game as Game).Arcade.Joysticks) {
             joystick.update();
         }
     }
