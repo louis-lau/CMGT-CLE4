@@ -6,8 +6,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     //private space: Phaser.Types.Input.Keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     public lives = 3;
     private loadShoot = 0;
-    public corn : Phaser.Physics.Arcade.Sprite;
-    
+    public corn: Phaser.Physics.Arcade.Sprite;
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon");
@@ -34,10 +33,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         
         //if(this.input.keyboard.isDown(87))
 
-        if (this.cursors.space.isDown && this.loadShoot == 0 ) {
+        if (this.cursors.space.isDown && this.loadShoot == 0) {
             this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn");
             this.corn.setVelocityX(this.body.velocity.x + 150);
-            this.loadShoot++
+            this.loadShoot++;
         }
 
         /*else if (this.cursors.space.isDown && this.loadShoot == 0) {
@@ -50,10 +49,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 
         if (this.cursors.space.isUp) {
-        this.loadShoot = 0
+            this.loadShoot = 0;
         }
-   
-        if (this.lives <= 0 || this.body.velocity.x >= -0.5 && this.body.velocity.x <= 0.5 && this.body.velocity.y >= -50 && this.body.velocity.y <= 1) {
+
+        if (this.lives < 0 || this.body.velocity.x <= 0) {
             this.scene.scene.start("EndScene");
         }
     }
