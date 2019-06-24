@@ -48,6 +48,10 @@ export class GameScene extends Phaser.Scene {
         //soundeffects
         this.sound.add("chew");
         this.sound.add("roekoe");
+        this.sound.add("break");
+        this.sound.add("breakfood");
+        this.sound.add("corn");
+
 
         this.player = new Player(this);
 
@@ -90,14 +94,22 @@ export class GameScene extends Phaser.Scene {
     private collectAmmo(player: Player, bullet: Phaser.Physics.Arcade.Sprite) {
         bullet.destroy();
         this.player.ammo++;
-        //this.sound.play(" ");
+        this.sound.play("corn");
         this.registry.values.score += 40;
     }
 
     private destroyOb(corn: Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
         corn.destroy();
+        this.sound.play("break");
         this.registry.values.score += 90;
+    }
+
+    private destroyFo(corn: Phaser.Physics.Arcade.Sprite, food: Phaser.Physics.Arcade.Sprite) {
+        food.destroy();
+        corn.destroy();
+        this.sound.play("breakfood");
+        this.registry.values.score -= 90;
     }
 
     private finish() {
@@ -131,6 +143,12 @@ export class GameScene extends Phaser.Scene {
         if (this.player.corn) {
             for (const obstacle of this.obstacles) {
                 this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this);
+            }
+        }
+
+        if (this.player.corn) {
+            for (const food of this.foods) {
+                this.physics.add.overlap(this.player.corn, food, this.destroyFo, null, this);
             }
         }
         console.log(this.nextSceneKey);

@@ -16,6 +16,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        scene.sound.add("shoot");
 
         this.setCollideWorldBounds(true);
         this.setBounce(0.2);
@@ -37,6 +38,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.space.isDown && this.loadShoot == 0 && this.ammo > 0) {
             this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn");
             this.corn.setVelocityX(this.body.velocity.x + 150);
+            this.scene.sound.play("shoot");
             this.loadShoot++;
             this.ammo--;
         }
