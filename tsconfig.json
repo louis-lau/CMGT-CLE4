@@ -10,6 +10,6 @@
         "./src/**/*"
     ],
     "files": [
-        "./node_modules/phaser-ce/typescript/phaser.d.ts"
+        "./node_modules/phaser/types/phaser.d.ts"
     ]
 }
