@@ -9,6 +9,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     //private space: Phaser.Types.Input.Keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     public lives = 3;
     private loadShoot = 0;
+    public ammo = 0;
     public corn: Phaser.Physics.Arcade.Sprite;
     private joystick: Joystick;
 
@@ -28,6 +29,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        scene.sound.add("shoot");
 
         this.setCollideWorldBounds(true);
         this.setBounce(0.2);
@@ -46,10 +48,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         
         //if(this.input.keyboard.isDown(87))
 
-        if (this.cursors.space.isDown && this.loadShoot == 0) {
+        if (this.cursors.space.isDown && this.loadShoot == 0 && this.ammo > 0) {
             this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn");
             this.corn.setVelocityX(this.body.velocity.x + 150);
+            this.scene.sound.play("shoot");
             this.loadShoot++;
+            this.ammo--;
         }
 
         let ourGame = this.scene.game as Game
@@ -76,7 +80,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.loadShoot = 0;
         }
 
-        if (this.lives < 0 || this.body.velocity.x <= 0) {
+        if (this.lives <= 0 || this.body.velocity.x <= 0) {
             this.scene.scene.start("EndScene");
         }
     }

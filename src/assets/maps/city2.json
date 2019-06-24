@@ -16,6 +16,124 @@
         }, 
         {
          "draworder":"topdown",
+         "id":5,
+         "name":"Ammo",
+         "objects":[
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":276,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":139,
+                 "y":165
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":277,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":1199,
+                 "y":125
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":278,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":1191,
+                 "y":228
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":279,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":1591,
+                 "y":188
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":280,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":1591,
+                 "y":113
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":281,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":1756,
+                 "y":147
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":282,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":2706,
+                 "y":18
+                }, 
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":283,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":2704,
+                 "y":275
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"Lives",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":2,
          "name":"Obstacles",
          "objects":[
@@ -2005,8 +2123,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":276,
+ "nextlayerid":7,
+ "nextobjectid":284,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -2024,7 +2142,7 @@
          "margin":0,
          "name":"tileset",
          "spacing":0,
-         "tilecount":8,
+         "tilecount":9,
          "tileheight":310,
          "tiles":[
                 {
@@ -2074,6 +2192,12 @@
                  "image":"..\/img\/finishline.png",
                  "imageheight":310,
                  "imagewidth":40
+                }, 
+                {
+                 "id":8,
+                 "image":"..\/..\/..\/..\/Downloads\/pixil-frame-0 (1).png",
+                 "imageheight":5,
+                 "imagewidth":5
                 }],
          "tilewidth":40
         }],
