@@ -1,5 +1,6 @@
 import { Player } from "../objects/player";
 import { BackgroundLayer } from "../objects/background-layer";
+import { Game } from "../app";
 
 export class GameScene extends Phaser.Scene {
     private player: Player;
@@ -39,11 +40,10 @@ export class GameScene extends Phaser.Scene {
         this.obstacles = obstacles;
         this.bullets = bullets;
         this.nextSceneKey = nextSceneKey;
+        let game = this.game as Game;
 
         music.play();
-        this.events.on("shutdown", function() {
-            music.stop();
-        });
+        this.events.on("shutdown", () => music.stop(), this.player.killController());
 
         //soundeffects
         this.sound.add("chew");
@@ -86,7 +86,7 @@ export class GameScene extends Phaser.Scene {
 
     private takeDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
-        this.player.lives--;
+        // this.player.lives--;
         this.sound.play("roekoe");
         this.registry.values.score -= 600;
     }

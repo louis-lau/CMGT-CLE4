@@ -4,9 +4,12 @@
         "noImplicitReturns": true,
         "noImplicitAny": false,
         "strictPropertyInitialization": false,
-        "target": "es5",
+        "target": "es6",
     },
     "include": [
         "./src/**/*"
     ],
+    "files": [
+        "./node_modules/phaser/types/phaser.d.ts"
+    ]
 }

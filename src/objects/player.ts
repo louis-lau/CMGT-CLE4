@@ -1,4 +1,7 @@
 import { Scale/*, Input*/ } from "phaser";
+import { Joystick } from "../utils/arcade/input/joystick";
+import { Game } from "../app";
+
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -8,9 +11,21 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private loadShoot = 0;
     public ammo = 0;
     public corn: Phaser.Physics.Arcade.Sprite;
+    private joystick: Joystick;
+
+    private shootListener : EventListener
+
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon");
+
+        this.shootListener = () => this.test1(); this.test2()
+
+        document.addEventListener("joystick0button0", this.shootListener) 
+        document.addEventListener("joystick0button1", () => this.test2())
+         
+        // gameover, shut down, andere scene
+        // document.removeEventListener("joystick0button0", this.shootListerner)
 
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -43,6 +58,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.ammo--;
         }
 
+        let ourGame = this.scene.game as Game
+        for (const joystick of ourGame.Arcade.Joysticks) {
+            joystick.update()
+
+            if(joystick.Left) console.log("LINKS!!");
+            
+        }
         /*else if (this.cursors.space.isDown && this.loadShoot == 0) {
             this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn");
             this.corn.setVelocityX(this.body.velocity.x + 150)
@@ -112,5 +134,16 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         greenShitEmitter.startFollow(this);
         greenShit2Emitter.startFollow(this);
         whiteShitEmitter.startFollow(this);
+    }
+
+    private test1() {
+        console.log("test1")
+    }
+    private test2() {
+        console.log("test2")
+    }
+
+    public killController() {
+        document.removeEventListener("joystick0button0", this.shootListener)
     }
 }
