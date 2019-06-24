@@ -105,6 +105,5 @@ export class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this);
             }
         }
-        console.log(this.nextSceneKey);
     }
 }
