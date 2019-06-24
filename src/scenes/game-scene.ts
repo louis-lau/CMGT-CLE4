@@ -105,6 +105,18 @@ export class GameScene extends Phaser.Scene {
             this.registry.values.score = 0
         }
 
+        /*console.log(this.player.body.velocity.y)
+        if (this.player.body.velocity.x <= 0.5)
+        {
+            //console.log("omlaag")
+            this.player.body.velocity.y = 250;
+            if(this.player.body.velocity.y == -36)//&& this.player.body.velocity.y <= -46)
+            {
+                console.log("DOOD");
+               // this.player.setVelocityY(-60);
+             }
+        }*/
+
         this.player.update();
         // Call update function for all backgroundlayers
         for (const backgroundLayer of this.backgroundLayers) {
