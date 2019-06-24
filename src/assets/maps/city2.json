@@ -16,6 +16,40 @@
         }, 
         {
          "draworder":"topdown",
+         "id":5,
+         "name":"Ammo",
+         "objects":[
+                {
+                 "gid":9,
+                 "height":5,
+                 "id":276,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5,
+                 "x":139,
+                 "y":165
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"Lives",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":2,
          "name":"Obstacles",
          "objects":[
@@ -2005,8 +2039,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":276,
+ "nextlayerid":7,
+ "nextobjectid":277,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -2024,7 +2058,7 @@
          "margin":0,
          "name":"tileset",
          "spacing":0,
-         "tilecount":8,
+         "tilecount":9,
          "tileheight":310,
          "tiles":[
                 {
@@ -2074,6 +2108,12 @@
                  "image":"..\/img\/finishline.png",
                  "imageheight":310,
                  "imagewidth":40
+                }, 
+                {
+                 "id":8,
+                 "image":"..\/..\/..\/..\/Downloads\/pixil-frame-0 (1).png",
+                 "imageheight":5,
+                 "imagewidth":5
                 }],
          "tilewidth":40
         }],

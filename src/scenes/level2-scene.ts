@@ -31,6 +31,7 @@ export class Level2Scene extends GameScene {
         // Create food and obstacle sprites and add to arrays, match textures to tiled gids
         let foods: Array<Phaser.GameObjects.Sprite> = [];
         let obstacles: Array<Phaser.GameObjects.Sprite> = [];
+        let bullets: Array<Phaser.GameObjects.Sprite> = [];
         foods = foods.concat(
             map.createFromObjects("Food", 1, { key: "chocolate" }),
             map.createFromObjects("Food", 5, { key: "fry" }),
@@ -41,10 +42,13 @@ export class Level2Scene extends GameScene {
             map.createFromObjects("Obstacles", 3, { key: "alcohol" }),
             map.createFromObjects("Obstacles", 7, { key: "sigaret" })
         );
+        bullets = bullets.concat(
+            map.createFromObjects("Ammo", 9, { key: "corn" })
+        );
 
         const nextSceneKey = "FinishScene";
 
-        super.create(map, music, backgroundLayers, foods, obstacles, finishline, nextSceneKey);
+        super.create(map, music, backgroundLayers, foods, obstacles, bullets, finishline, nextSceneKey);
     }
 
     update() {

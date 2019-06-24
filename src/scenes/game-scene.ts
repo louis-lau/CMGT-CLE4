@@ -7,6 +7,7 @@ export class GameScene extends Phaser.Scene {
     private foods: Array<Phaser.GameObjects.Sprite> = [];
     private obstacles: Array<Phaser.GameObjects.Sprite> = [];
     private nextSceneKey: string;
+    private bullets: Array<Phaser.GameObjects.Sprite> = [];
 
     constructor(config: Phaser.Types.Scenes.SettingsConfig) {
         super(config);
@@ -19,6 +20,7 @@ export class GameScene extends Phaser.Scene {
      * @param backgroundLayers Array of BackgroundLayers, allows for parralax effect
      * @param foods Array of food sprites
      * @param obstacles Array of obstacle sprites
+     * @param bullets Array of ammo sprites
      * @param finishline Finish Line sprite
      * @param nextSceneKey Key for the scene that loads when finishing this level
      */
@@ -28,12 +30,14 @@ export class GameScene extends Phaser.Scene {
         backgroundLayers: Array<BackgroundLayer>,
         foods: Array<Phaser.GameObjects.Sprite>,
         obstacles: Array<Phaser.GameObjects.Sprite>,
+        bullets: Array<Phaser.GameObjects.Sprite>,
         finishline: Phaser.GameObjects.Sprite,
         nextSceneKey: string
     ): void {
         this.backgroundLayers = backgroundLayers;
         this.foods = foods;
         this.obstacles = obstacles;
+        this.bullets = bullets;
         this.nextSceneKey = nextSceneKey;
 
         music.play();
@@ -56,6 +60,11 @@ export class GameScene extends Phaser.Scene {
             this.physics.add.overlap(this.player, obstacle, this.takeDamage, null, this);
         }
 
+        for (const bullet of this.bullets) {
+            this.physics.add.existing(bullet);
+            this.physics.add.overlap(this.player, bullet, this.collectAmmo, null, this);
+        }
+
         this.physics.add.existing(finishline);
         this.physics.add.overlap(this.player, finishline, this.finish, null, this);
 
@@ -76,6 +85,13 @@ export class GameScene extends Phaser.Scene {
         this.player.lives--;
         this.sound.play("roekoe");
         this.registry.values.score -= 600;
+    }
+
+    private collectAmmo(player: Player, bullet: Phaser.Physics.Arcade.Sprite) {
+        bullet.destroy();
+        this.player.ammo++;
+        //this.sound.play(" ");
+        this.registry.values.score += 40;
     }
 
     private destroyOb(corn: Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
