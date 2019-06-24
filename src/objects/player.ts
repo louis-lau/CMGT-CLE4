@@ -18,10 +18,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene) {
         super(scene, 50, 135, "pigeon");
 
-        this.shootListener = () => this.test1(); this.test2()
-
-        document.addEventListener("joystick0button0", this.shootListener) 
-        document.addEventListener("joystick0button1", () => this.test2())
+        // this.shootListener = () => this.test1();
+        // document.addEventListener("joystick0button0", this.shootListener) 
          
         // gameover, shut down, andere scene
         // document.removeEventListener("joystick0button0", this.shootListerner)
@@ -40,9 +38,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     public update(): void {
-        if (this.cursors.left.isDown || this.cursors.up.isDown) {
+        if (this.cursors.up.isDown) {
             this.setVelocityY(-200);
-        } else if (this.cursors.right.isDown || this.cursors.down.isDown) {
+        } else if (this.cursors.down.isDown) {
             this.setVelocityY(200);
         }
         
@@ -58,7 +56,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         for (const joystick of ourGame.Arcade.Joysticks) {
             joystick.update()
 
-            if(joystick.Left) console.log("LINKS!!");
+            if (joystick.Up) {
+                this.setVelocityY(-200);
+            } else if (joystick.Down) {
+                this.setVelocityY(200);
+            }
             
         }
         /*else if (this.cursors.space.isDown && this.loadShoot == 0) {
@@ -132,14 +134,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         whiteShitEmitter.startFollow(this);
     }
 
-    private test1() {
-        console.log("test1")
-    }
-    private test2() {
-        console.log("test2")
-    }
-
     public killController() {
         document.removeEventListener("joystick0button0", this.shootListener)
     }
 }
+
+
+// if (this.cursors.left.isDown || this.cursors.up.isDown) {
+//     this.setVelocityY(-200);
+// } else if (this.cursors.right.isDown || this.cursors.down.isDown) {
+//     this.setVelocityY(200);
+// }

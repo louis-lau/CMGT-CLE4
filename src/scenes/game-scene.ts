@@ -39,7 +39,8 @@ export class GameScene extends Phaser.Scene {
         let game = this.game as Game;
 
         music.play();
-        this.events.on("shutdown", () => music.stop(), this.player.killController());
+        this.events.on("shutdown", () => music.stop());
+        // this.events.on("shutdown", () => this.player.killController());
 
         //soundeffects
         this.sound.add("chew");
@@ -73,7 +74,7 @@ export class GameScene extends Phaser.Scene {
 
     private takeDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy();
-        // this.player.lives--;
+        this.player.lives--;
         this.sound.play("roekoe");
         this.registry.values.score -= 600;
     }

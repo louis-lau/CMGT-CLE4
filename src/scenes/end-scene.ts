@@ -1,3 +1,5 @@
+import { Game } from "../app";
+
 export class EndScene extends Phaser.Scene {
     constructor() {
         super({ key: "EndScene" });
@@ -24,5 +26,21 @@ export class EndScene extends Phaser.Scene {
         this.input.once("pointerdown", pointer => {
             this.scene.start("Level1Scene");
         });
+
+        let startGame = () => this.startGame();
+        document.addEventListener("joystick0button0", startGame);
+        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame));
+    }
+
+    update() {
+        // console.log(this.arcade.Joysticks)
+        for (let joystick of (this.game as Game).Arcade.Joysticks) {
+            joystick.update();
+        }
+    }
+
+    startGame() {
+        
+        this.scene.start("Level1Scene");
     }
 }

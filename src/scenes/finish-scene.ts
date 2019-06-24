@@ -20,15 +20,33 @@ export class FinishScene extends Phaser.Scene {
             .setStroke("black", 1);
 
         this.input.once("pointerdown", pointer => {
-            this.scene.start("GameScene");
+            this.scene.start("Level1Scene");
+    
+            // Only start UI scene if it's not already active
+            if (!this.scene.isActive("UIScene")) {
+                this.scene.add("UIScene", new UIScene("UIScene"), true);
+            }
         });
+
+        let startGame = () => this.startGame();
+        document.addEventListener("joystick0button0", startGame);
+        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame));
     }
 
+    update() {
+        // console.log(this.arcade.Joysticks)
+        for (let joystick of (this.game as Game).Arcade.Joysticks) {
+            joystick.update();
+        }
+    }
+    
     private playMusic() {
         const music = this.sound.add("party", { loop: true });
         music.play();
-        this.events.on("shutdown", function() {
-            music.stop();
-        });
+        this.events.on("shutdown", () => music.stop());
+        };
+
+    startGame() {
+        this.scene.start("Level1Scene");
     }
 }

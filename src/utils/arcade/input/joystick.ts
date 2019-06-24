@@ -2,7 +2,7 @@ import { DebugPanel } from "./support/debugpanel";
 
 export class Joystick {
 
-    private DEBUG           : boolean   = true;
+    private DEBUG           : boolean   = false;
 
     // BUT1 and BUT2 are the indexes of the redirect function. 
     // When both are pressed, redirect to homepage
