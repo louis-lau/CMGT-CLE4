@@ -1,3 +1,5 @@
+import { Game } from "../app";
+
 export class FinishScene extends Phaser.Scene {
     constructor() {
         super({ key: "FinishScene" });
@@ -21,11 +23,6 @@ export class FinishScene extends Phaser.Scene {
 
         this.input.once("pointerdown", pointer => {
             this.scene.start("Level1Scene");
-    
-            // Only start UI scene if it's not already active
-            if (!this.scene.isActive("UIScene")) {
-                this.scene.add("UIScene", new UIScene("UIScene"), true);
-            }
         });
 
         let startGame = () => this.startGame();
@@ -39,7 +36,7 @@ export class FinishScene extends Phaser.Scene {
             joystick.update();
         }
     }
-    
+
     private playMusic() {
         const music = this.sound.add("party", { loop: true });
         music.play();
