@@ -18,7 +18,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene) {
         super(scene, 50, 135, "pigeon");
 
-        this.shootListener = () => this.test1()
+        this.shootListener = () => this.test1(); this.test2()
 
         document.addEventListener("joystick0button0", this.shootListener) 
         document.addEventListener("joystick0button1", () => this.test2())
@@ -139,7 +139,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         console.log("test2")
     }
 
-    public shutdown() {
+    public killController() {
         document.removeEventListener("joystick0button0", this.shootListener)
     }
 }

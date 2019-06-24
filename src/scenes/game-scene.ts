@@ -39,10 +39,7 @@ export class GameScene extends Phaser.Scene {
         let game = this.game as Game;
 
         music.play();
-        this.events.on("shutdown", function() {
-            music.stop();
-            this.player.shutdown();
-        });
+        this.events.on("shutdown", () => music.stop(), this.player.killController());
 
         //soundeffects
         this.sound.add("chew");
