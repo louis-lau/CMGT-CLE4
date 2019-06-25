@@ -44,7 +44,7 @@ export class GameScene extends Phaser.Scene {
 
         music.play()
         this.events.on("shutdown", () => music.stop())
-        // this.events.on("shutdown", () => this.player.killController());
+        this.events.on("shutdown", () => this.player.killController());
 
         //soundeffects
         this.sound.add("chew")
@@ -77,6 +77,31 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, true, undefined, undefined, -175)
     }
 
+    update() {
+        this.registry.values.score += this.player.body.velocity.x / 100
+        if (this.registry.values.score < 0) {
+            this.registry.values.score = 0
+        }
+
+        this.player.update()
+        // Call update function for all backgroundlayers
+        for (const backgroundLayer of this.backgroundLayers) {
+            backgroundLayer.update(this.player.body.velocity.x)
+        }
+
+        if (this.player.corn) {
+            for (const obstacle of this.obstacles) {
+                this.physics.add.overlap(this.player.corn, obstacle, this.destroyObject, null, this)
+            }
+        }
+
+        if (this.player.corn) {
+            for (const food of this.foods) {
+                this.physics.add.overlap(this.player.corn, food, this.destroyFood, null, this)
+            }
+        }
+    }
+
     private collectFood(player: Player, food: Phaser.Physics.Arcade.Sprite) {
         food.destroy()
         this.player.accelerate()
@@ -98,14 +123,14 @@ export class GameScene extends Phaser.Scene {
         this.registry.values.score += 40
     }
 
-    private destroyOb(corn: Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
+    private destroyObject(corn: Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
         obstacle.destroy()
         corn.destroy()
         this.sound.play("break")
         this.registry.values.score += 90
     }
 
-    private destroyFo(corn: Phaser.Physics.Arcade.Sprite, food: Phaser.Physics.Arcade.Sprite) {
+    private destroyFood(corn: Phaser.Physics.Arcade.Sprite, food: Phaser.Physics.Arcade.Sprite) {
         food.destroy()
         corn.destroy()
         this.sound.play("breakfood")
@@ -116,43 +141,6 @@ export class GameScene extends Phaser.Scene {
         this.scene.start(this.nextSceneKey)
     }
 
-    update() {
-        this.registry.values.score += this.player.body.velocity.x / 100
-        if (this.registry.values.score < 0) {
-            this.registry.values.score = 0
-        }
-
-        /*console.log(this.player.body.velocity.y)
-        if (this.player.body.velocity.x <= 0.5)
-        {
-            //console.log("omlaag")
-            this.player.body.velocity.y = 250;
-            if(this.player.body.velocity.y == -36)//&& this.player.body.velocity.y <= -46)
-            {
-                console.log("DOOD");
-               // this.player.setVelocityY(-60);
-             }
-        }*/
-
-        this.player.update()
-        // Call update function for all backgroundlayers
-        for (const backgroundLayer of this.backgroundLayers) {
-            backgroundLayer.update(this.player.body.velocity.x)
-        }
-
-        if (this.player.corn) {
-            for (const obstacle of this.obstacles) {
-                this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this)
-            }
-        }
-
-        if (this.player.corn) {
-            for (const food of this.foods) {
-                this.physics.add.overlap(this.player.corn, food, this.destroyFo, null, this)
-            }
-        }
-    }
-
     //CHEATS
 
     private changeCharacter() {
@@ -161,17 +149,11 @@ export class GameScene extends Phaser.Scene {
         this.player.setTexture(randClothes)
     }
 
-    private constantSpeed(player: Player, food: Phaser.Physics.Arcade.Sprite) {
-        food.destroy()
-        this.sound.play("chew")
-        this.registry.values.score += 100
+    private constantSpeed() {
         this.player.setDragX(0)
     }
 
-    private turboSpeed(player: Player, food: Phaser.Physics.Arcade.Sprite) {
-        food.destroy()
-        this.player.turboAccelerate()
-        this.sound.play("chew")
-        this.registry.values.score += 100
+    private turboTurbo() {
+        this.player.setVelocityX(1200)
     }
 }

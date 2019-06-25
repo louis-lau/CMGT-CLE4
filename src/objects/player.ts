@@ -89,12 +89,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    public turboAccelerate() {
-        if (this.body.velocity.x <= 1200) {
-            this.body.velocity.x += 150
-        }
-    }
-
     private createShit() {
         let whiteShit = this.scene.add.particles("white-shit")
         let whiteShitEmitter = whiteShit.createEmitter({
