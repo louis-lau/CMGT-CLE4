@@ -1,7 +1,7 @@
-import { Joystick } from "../joystick";
+import { Joystick } from "../joystick"
 
 //#region Template
-const template = document.createElement('template');
+const template = document.createElement("template")
 template.innerHTML = `
 <style>
 :host {
@@ -73,55 +73,54 @@ root .button-div {
 </style>`
 //#endregion
 
-export class DebugPanel extends HTMLElement{
-    private readonly panelHeight    : number = 120
-    private readonly panelSpacing   : number = 10
+export class DebugPanel extends HTMLElement {
+    private readonly panelHeight: number = 120
+    private readonly panelSpacing: number = 10
 
-    private joystick        : Joystick
-    private numberOfButtons : number
-    private buttonDivs      : HTMLElement[] = []
-    
-    private left            : HTMLElement
-    private right           : HTMLElement
-    private up              : HTMLElement
-    private down            : HTMLElement
-    
-    private rootElement     : HTMLElement
-    
-    public Axes             : number[]      = []
+    private joystick: Joystick
+    private numberOfButtons: number
+    private buttonDivs: HTMLElement[] = []
 
-    constructor(joystick : Joystick, numOfButtons : number) {
+    private left: HTMLElement
+    private right: HTMLElement
+    private up: HTMLElement
+    private down: HTMLElement
+
+    private rootElement: HTMLElement
+
+    public Axes: number[] = []
+
+    constructor(joystick: Joystick, numOfButtons: number) {
         super()
-        
+
         this.joystick = joystick
         this.numberOfButtons = numOfButtons
 
-        let spaceFromTop = this.panelSpacing + ( this.joystick.JoystickNumber * (this.panelHeight + this.panelSpacing) )
+        let spaceFromTop = this.panelSpacing + this.joystick.JoystickNumber * (this.panelHeight + this.panelSpacing)
         this.style.top = spaceFromTop + "px"
 
-        this.rootElement = document.createElement('root')
+        this.rootElement = document.createElement("root")
         this.rootElement.style.height = this.panelHeight + "px"
         template.appendChild(this.rootElement)
 
         // identifier
         let identifier = document.createElement("div")
-        identifier.classList.add('identifier')
+        identifier.classList.add("identifier")
         identifier.innerHTML = "#" + this.joystick.JoystickNumber
         this.rootElement.appendChild(identifier)
-        
+
         // axes
         this.createHTMLForAxes()
-        
+
         // this.buttons = buttons
         this.createHTMLForButtons()
         this.createListenersForButtons()
 
-        this.attachShadow({mode: 'open'});
-        if(this.shadowRoot) {
+        this.attachShadow({ mode: "open" })
+        if (this.shadowRoot) {
             let temp = template.content.cloneNode(true)
             temp.appendChild(this.rootElement)
-            this.shadowRoot.appendChild(temp);
-            
+            this.shadowRoot.appendChild(temp)
         }
 
         document.body.appendChild(this)
@@ -129,17 +128,15 @@ export class DebugPanel extends HTMLElement{
 
     private createListenersForButtons() {
         for (let i = 0; i < this.numberOfButtons; i++) {
-            document.addEventListener(this.joystick.ButtonEvents[i], 
-                (e:Event) => this.handleButtonClicks(e, i))              
+            document.addEventListener(this.joystick.ButtonEvents[i], (e: Event) => this.handleButtonClicks(e, i))
         }
     }
 
-    private handleButtonClicks(event:Event, index: number) {
-        this.buttonDivs[index].style.filter =
-                    'hue-rotate('+(Math.random() * 360)+'deg)' 
+    private handleButtonClicks(event: Event, index: number) {
+        this.buttonDivs[index].style.filter = "hue-rotate(" + Math.random() * 360 + "deg)"
     }
 
-    private createHTMLForButtons() : void {
+    private createHTMLForButtons(): void {
         let buttonWrapper = document.createElement("div")
         buttonWrapper.className = "button-wrapper"
 
@@ -149,29 +146,29 @@ export class DebugPanel extends HTMLElement{
             buttonWrapper.appendChild(buttonDiv)
 
             buttonDiv.style.backgroundColor = "blue"
-            buttonDiv.innerHTML = "Button "+(index + 1)
+            buttonDiv.innerHTML = "Button " + (index + 1)
 
             this.buttonDivs.push(buttonDiv)
         }
         this.rootElement.appendChild(buttonWrapper)
     }
 
-    private createHTMLForAxes() : void {
+    private createHTMLForAxes(): void {
         let axesWrapper = document.createElement("div")
         axesWrapper.className = "axes-wrapper"
 
-        for(let i = 1 ; i <= 9 ; i++) {
-            let cell = document.createElement('div')
+        for (let i = 1; i <= 9; i++) {
+            let cell = document.createElement("div")
             cell.className = "axes-cell"
-            if(i % 2 == 0) cell.classList.add("direction")
-            if(i == 5 ) cell.classList.add("center")
+            if (i % 2 == 0) cell.classList.add("direction")
+            if (i == 5) cell.classList.add("center")
             axesWrapper.appendChild(cell)
 
             switch (i) {
                 case 2:
                     this.up = cell
                     break
-                case 4: 
+                case 4:
                     this.left = cell
                     break
                 case 6:
@@ -186,32 +183,24 @@ export class DebugPanel extends HTMLElement{
         this.rootElement.appendChild(axesWrapper)
     }
 
-    public update() : void {
+    public update(): void {
         // X-axe
-        if (this.Axes[0] == 0)
-        {
+        if (this.Axes[0] == 0) {
             this.left.classList.remove("active")
             this.right.classList.remove("active")
-        }   
-        else {
-            if (this.Axes[0] < 0) 
-                this.left.classList.add("active")
-            else if(this.Axes[0] > 0)
-                this.right.classList.add("active")
-        } 
+        } else {
+            if (this.Axes[0] < 0) this.left.classList.add("active")
+            else if (this.Axes[0] > 0) this.right.classList.add("active")
+        }
 
         // Y-axe
-        if (this.Axes[1] == 0)
-        {
+        if (this.Axes[1] == 0) {
             this.up.classList.remove("active")
             this.down.classList.remove("active")
-        }   
-        else {
-            if (this.Axes[1] < 0) 
-                this.up.classList.add("active")
-            else if(this.Axes[1] > 0)
-                this.down.classList.add("active")
-        } 
+        } else {
+            if (this.Axes[1] < 0) this.up.classList.add("active")
+            else if (this.Axes[1] > 0) this.down.classList.add("active")
+        }
     }
 }
 

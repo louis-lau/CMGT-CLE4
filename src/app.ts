@@ -1,12 +1,12 @@
-import "phaser";
-import { BootScene } from "./scenes/boot-scene";
-import { StartScene } from "./scenes/start-scene";
-import { EndScene } from "./scenes/end-scene";
-import { FinishScene } from "./scenes/finish-scene";
-import { UIScene } from "./scenes/ui-scene";
-import { Level1Scene } from "./scenes/level1-scene";
-import { Level2Scene } from "./scenes/level2-scene";
-import { Arcade } from "./utils/arcade/arcade";
+import "phaser"
+import { BootScene } from "./scenes/boot-scene"
+import { StartScene } from "./scenes/start-scene"
+import { EndScene } from "./scenes/end-scene"
+import { FinishScene } from "./scenes/finish-scene"
+import { UIScene } from "./scenes/ui-scene"
+import { Level1Scene } from "./scenes/level1-scene"
+import { Level2Scene } from "./scenes/level2-scene"
+import { Arcade } from "./utils/arcade/arcade"
 
 const config: Phaser.Types.Core.GameConfig = {
     width: 480,
@@ -35,19 +35,19 @@ const config: Phaser.Types.Core.GameConfig = {
         }
     },
     render: { pixelArt: true }
-};
+}
 
 export class Game extends Phaser.Game {
     private arcade: Arcade
 
-    public get Arcade(): Arcade{
+    public get Arcade(): Arcade {
         return this.arcade
     }
 
     constructor(config: Phaser.Types.Core.GameConfig) {
-        super(config);
+        super(config)
         this.arcade = new Arcade(this, true)
     }
 }
 
-window.addEventListener("load", () => new Game(config));
+window.addEventListener("load", () => new Game(config))

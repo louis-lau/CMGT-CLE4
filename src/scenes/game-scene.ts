@@ -1,17 +1,17 @@
-import { Player } from "../objects/player";
-import { BackgroundLayer } from "../objects/background-layer";
-import { Game } from "../app";
+import { Player } from "../objects/player"
+import { BackgroundLayer } from "../objects/background-layer"
+import { Game } from "../app"
 
 export class GameScene extends Phaser.Scene {
-    private player: Player;
-    private backgroundLayers: Array<BackgroundLayer> = [];
-    private foods: Array<Phaser.GameObjects.Sprite> = [];
-    private obstacles: Array<Phaser.GameObjects.Sprite> = [];
-    private nextSceneKey: string;
-    private bullets: Array<Phaser.GameObjects.Sprite> = [];
+    private player: Player
+    private backgroundLayers: Array<BackgroundLayer> = []
+    private foods: Array<Phaser.GameObjects.Sprite> = []
+    private obstacles: Array<Phaser.GameObjects.Sprite> = []
+    private nextSceneKey: string
+    private bullets: Array<Phaser.GameObjects.Sprite> = []
 
     constructor(config: Phaser.Types.Scenes.SettingsConfig) {
-        super(config);
+        super(config)
     }
 
     /**
@@ -35,92 +35,91 @@ export class GameScene extends Phaser.Scene {
         finishline: Phaser.GameObjects.Sprite,
         nextSceneKey: string
     ): void {
-        this.backgroundLayers = backgroundLayers;
-        this.foods = foods;
-        this.obstacles = obstacles;
-        this.bullets = bullets;
-        this.nextSceneKey = nextSceneKey;
-        let game = this.game as Game;
+        this.backgroundLayers = backgroundLayers
+        this.foods = foods
+        this.obstacles = obstacles
+        this.bullets = bullets
+        this.nextSceneKey = nextSceneKey
+        let game = this.game as Game
 
-        music.play();
-        this.events.on("shutdown", () => music.stop());
+        music.play()
+        this.events.on("shutdown", () => music.stop())
         // this.events.on("shutdown", () => this.player.killController());
 
         //soundeffects
-        this.sound.add("chew");
-        this.sound.add("roekoe");
-        this.sound.add("break");
-        this.sound.add("breakfood");
-        this.sound.add("corn");
+        this.sound.add("chew")
+        this.sound.add("roekoe")
+        this.sound.add("break")
+        this.sound.add("breakfood")
+        this.sound.add("corn")
 
-
-        this.player = new Player(this);
+        this.player = new Player(this)
 
         for (const food of this.foods) {
-            this.physics.add.existing(food);
-            this.physics.add.overlap(this.player, food, this.collectFood, null, this);
+            this.physics.add.existing(food)
+            this.physics.add.overlap(this.player, food, this.collectFood, null, this)
         }
         for (const obstacle of this.obstacles) {
-            this.physics.add.existing(obstacle);
-            this.physics.add.overlap(this.player, obstacle, this.takeDamage, null, this);
+            this.physics.add.existing(obstacle)
+            this.physics.add.overlap(this.player, obstacle, this.takeDamage, null, this)
         }
 
         for (const bullet of this.bullets) {
-            this.physics.add.existing(bullet);
-            this.physics.add.overlap(this.player, bullet, this.collectAmmo, null, this);
+            this.physics.add.existing(bullet)
+            this.physics.add.overlap(this.player, bullet, this.collectAmmo, null, this)
         }
 
-        this.physics.add.existing(finishline);
-        this.physics.add.overlap(this.player, finishline, this.finish, null, this);
+        this.physics.add.existing(finishline)
+        this.physics.add.overlap(this.player, finishline, this.finish, null, this)
 
         // Set camera bounds and start following
-        this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
-        this.cameras.main.startFollow(this.player, true, undefined, undefined, -175);
+        this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height)
+        this.cameras.main.startFollow(this.player, true, undefined, undefined, -175)
     }
 
     private collectFood(player: Player, food: Phaser.Physics.Arcade.Sprite) {
-        food.destroy();
-        this.player.accelerate();
-        this.sound.play("chew");
-        this.registry.values.score += 100;
+        food.destroy()
+        this.player.accelerate()
+        this.sound.play("chew")
+        this.registry.values.score += 100
     }
 
     private takeDamage(player: Player, obstacle: Phaser.Physics.Arcade.Sprite) {
-        obstacle.destroy();
-        this.player.lives--;
-        this.sound.play("roekoe");
-        this.registry.values.score -= 600;
+        obstacle.destroy()
+        this.player.lives--
+        this.sound.play("roekoe")
+        this.registry.values.score -= 600
     }
 
     private collectAmmo(player: Player, bullet: Phaser.Physics.Arcade.Sprite) {
-        bullet.destroy();
-        this.player.ammo++;
-        this.sound.play("corn");
-        this.registry.values.score += 40;
+        bullet.destroy()
+        this.player.ammo++
+        this.sound.play("corn")
+        this.registry.values.score += 40
     }
 
     private destroyOb(corn: Phaser.Physics.Arcade.Sprite, obstacle: Phaser.Physics.Arcade.Sprite) {
-        obstacle.destroy();
-        corn.destroy();
-        this.sound.play("break");
-        this.registry.values.score += 90;
+        obstacle.destroy()
+        corn.destroy()
+        this.sound.play("break")
+        this.registry.values.score += 90
     }
 
     private destroyFo(corn: Phaser.Physics.Arcade.Sprite, food: Phaser.Physics.Arcade.Sprite) {
-        food.destroy();
-        corn.destroy();
-        this.sound.play("breakfood");
-        this.registry.values.score -= 90;
+        food.destroy()
+        corn.destroy()
+        this.sound.play("breakfood")
+        this.registry.values.score -= 90
     }
 
     private finish() {
-        this.scene.start(this.nextSceneKey);
+        this.scene.start(this.nextSceneKey)
     }
 
     update() {
-        this.registry.values.score += this.player.body.velocity.x / 100;
+        this.registry.values.score += this.player.body.velocity.x / 100
         if (this.registry.values.score < 0) {
-            this.registry.values.score = 0;
+            this.registry.values.score = 0
         }
 
         /*console.log(this.player.body.velocity.y)
@@ -135,21 +134,21 @@ export class GameScene extends Phaser.Scene {
              }
         }*/
 
-        this.player.update();
+        this.player.update()
         // Call update function for all backgroundlayers
         for (const backgroundLayer of this.backgroundLayers) {
-            backgroundLayer.update(this.player.body.velocity.x);
+            backgroundLayer.update(this.player.body.velocity.x)
         }
 
         if (this.player.corn) {
             for (const obstacle of this.obstacles) {
-                this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this);
+                this.physics.add.overlap(this.player.corn, obstacle, this.destroyOb, null, this)
             }
         }
 
         if (this.player.corn) {
             for (const food of this.foods) {
-                this.physics.add.overlap(this.player.corn, food, this.destroyFo, null, this);
+                this.physics.add.overlap(this.player.corn, food, this.destroyFo, null, this)
             }
         }
     }
@@ -159,21 +158,20 @@ export class GameScene extends Phaser.Scene {
     private changeCharacter() {
         let clothes: Array<string> = ["parrot-pigeon", "flappybird", "rasta-pigeon", "white-dove"]
         let randClothes: string = clothes[Math.floor(Math.random() * clothes.length)]
-        this.player.setTexture(randClothes);
+        this.player.setTexture(randClothes)
     }
 
     private constantSpeed(player: Player, food: Phaser.Physics.Arcade.Sprite) {
-        food.destroy();
-        this.sound.play("chew");
-        this.registry.values.score += 100;
-        this.player.setDragX(0);
-        }
-
-    private turboSpeed(player: Player, food: Phaser.Physics.Arcade.Sprite) {
-        food.destroy();
-        this.player.turboAccelerate();
-        this.sound.play("chew");
-        this.registry.values.score += 100;
-        }
+        food.destroy()
+        this.sound.play("chew")
+        this.registry.values.score += 100
+        this.player.setDragX(0)
     }
 
+    private turboSpeed(player: Player, food: Phaser.Physics.Arcade.Sprite) {
+        food.destroy()
+        this.player.turboAccelerate()
+        this.sound.play("chew")
+        this.registry.values.score += 100
+    }
+}
