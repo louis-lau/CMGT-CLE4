@@ -34,7 +34,9 @@ const config: Phaser.Types.Core.GameConfig = {
             debug: false
         }
     },
-    render: { pixelArt: true }
+    render: {
+        pixelArt: true
+    }
 }
 
 export class Game extends Phaser.Game {

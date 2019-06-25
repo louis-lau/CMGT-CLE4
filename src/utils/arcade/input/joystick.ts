@@ -100,6 +100,7 @@ export class Joystick {
 
             if (this.buttonPressed(gamepad.buttons[index]) && !this.buttonPressed(this.previousGamepad.buttons[index])) {
                 document.dispatchEvent(new Event(this.buttonEvents[index]))
+                document.dispatchEvent(new CustomEvent("buttonPressed",{detail: this.buttonEvents[index]}))
             }
             if (
                 this.buttonPressed(gamepad.buttons[this.BUT1]) &&

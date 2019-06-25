@@ -44,8 +44,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(200)
         }
 
-        //if(this.input.keyboard.isDown(87))
-
         if (this.cursors.space.isDown && this.loadShoot == 0 && this.ammo > 0) {
             this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn")
             this.corn.setVelocityX(this.body.velocity.x + 150)
@@ -64,13 +62,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 this.setVelocityY(200)
             }
         }
-        /*else if (this.cursors.space.isDown && this.loadShoot == 0) {
-            this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn");
-            this.corn.setVelocityX(this.body.velocity.x + 150)
-            //  this.corn.setAngle(12);
-            //  this.corn.setVelocityY(150);
-            this.loadShoot++
-        }*/
 
         if (this.cursors.space.isUp) {
             this.loadShoot = 0
@@ -79,8 +70,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.lives <= 0 || this.body.velocity.x <= 0) {
             this.scene.scene.start("EndScene")
         }
-
-        console.log(this.body.velocity.x)
     }
 
     public accelerate() {
@@ -140,9 +129,3 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         document.removeEventListener("joystick0button0", this.shootListener)
     }
 }
-
-// if (this.cursors.left.isDown || this.cursors.up.isDown) {
-//     this.setVelocityY(-200);
-// } else if (this.cursors.right.isDown || this.cursors.down.isDown) {
-//     this.setVelocityY(200);
-// }

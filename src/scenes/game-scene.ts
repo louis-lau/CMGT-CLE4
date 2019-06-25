@@ -8,6 +8,7 @@ export class GameScene extends Phaser.Scene {
     private foods: Array<Phaser.GameObjects.Sprite> = []
     private obstacles: Array<Phaser.GameObjects.Sprite> = []
     private nextSceneKey: string
+    private currentButtonCombo = ""
     private bullets: Array<Phaser.GameObjects.Sprite> = []
 
     constructor(config: Phaser.Types.Scenes.SettingsConfig) {
@@ -40,11 +41,17 @@ export class GameScene extends Phaser.Scene {
         this.obstacles = obstacles
         this.bullets = bullets
         this.nextSceneKey = nextSceneKey
-        let game = this.game as Game
+
+        let buttonCombo = event => this.buttonCombo(event)
+        document.addEventListener("buttonPressed", buttonCombo)
 
         music.play()
-        this.events.on("shutdown", () => music.stop())
-        this.events.on("shutdown", () => this.player.killController());
+
+        this.events.on("shutdown", () => {
+            music.stop()
+            this.player.killController()
+            document.removeEventListener("buttonPressed", buttonCombo)
+        })
 
         //soundeffects
         this.sound.add("chew")
@@ -143,17 +150,76 @@ export class GameScene extends Phaser.Scene {
 
     //CHEATS
 
+    private buttonCombo(event: CustomEvent) {
+        const eventDetail: string = event.detail
+        let comboChar: string
+        let PartialMatch = false
+        const cheats = [
+            {
+                name: "Outfit change",
+                code: "4213",
+                execute: () => this.changeCharacter()
+            },
+            {
+                name: "No slowdown",
+                code: "4312",
+                execute: () => this.player.setDragX(0)
+            },
+            {
+                name: "Speed boost",
+                code: "2222",
+                execute: () => this.player.setVelocityX(400)
+            },
+            {
+                name: "Tiny birb",
+                code: "3333",
+                execute: () => this.player.setScale(0.5, 0.5)
+            },
+            {
+                name: "Yo momma",
+                code: "4444",
+                execute: () => this.player.setScale(2, 2)
+            }
+        ]
+
+        // Extract info from joystick0button0 string
+        const joystick: number = Number(eventDetail.substr(8, 1))
+        const button: number = Number(eventDetail.substr(15, 1))
+
+        if (joystick === 0) {
+            // button starts at 0 while cheat code numbers start at 1
+            comboChar = (button + 1).toString()
+        } else if (joystick === 1) {
+            // convert button to letter, 0 = A
+            comboChar = String.fromCharCode(65 + button)
+        }
+
+        // add character to current button combo
+        this.currentButtonCombo += comboChar
+
+        for (const cheat of cheats) {
+            if (cheat.code === this.currentButtonCombo) {
+                cheat.execute()
+            } else if (cheat.code.startsWith(this.currentButtonCombo)) {
+                // current key combo matches partially with a cheat
+                PartialMatch = true
+            }
+        }
+
+        if (!PartialMatch) {
+            // No partial match found, reset key combo
+            this.currentButtonCombo = ""
+        }
+    }
+
     private changeCharacter() {
-        let clothes: Array<string> = ["parrot-pigeon", "flappybird", "rasta-pigeon", "white-dove"]
-        let randClothes: string = clothes[Math.floor(Math.random() * clothes.length)]
+        let randClothes = this.player.texture.key
+        // only pick a random skin that's currently not being used
+        while (randClothes === this.player.texture.key) {
+            let clothes: Array<string> = ["parrot-pigeon", "flappybird", "rasta-pigeon", "white-dove", "pigeon"]
+            randClothes = clothes[Math.floor(Math.random() * clothes.length)]
+        }
         this.player.setTexture(randClothes)
-    }
-
-    private constantSpeed() {
-        this.player.setDragX(0)
-    }
-
-    private turboTurbo() {
-        this.player.setVelocityX(1200)
+        this.player.body.setSize(this.player.displayWidth, this.player.displayHeight)
     }
 }
