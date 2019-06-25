@@ -83,6 +83,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.lives <= 0 || this.body.velocity.x <= 0) {
             this.scene.scene.start("EndScene");
         }
+
+        console.log(this.body.velocity.x)
     }
 
     public accelerate() {
@@ -90,6 +92,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.body.velocity.x += 20;
         }
     }
+
+    public turboAccelerate() {
+        if (this.body.velocity.x <= 1200) {
+            this.body.velocity.x += 150
+        }
+    }    
 
     private createShit() {
         let whiteShit = this.scene.add.particles("white-shit");
