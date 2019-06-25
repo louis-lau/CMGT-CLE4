@@ -1,8 +1,8 @@
-import { Game } from "../app";
+import { Game } from "../app"
 
 export class EndScene extends Phaser.Scene {
     constructor() {
-        super({ key: "EndScene" });
+        super({ key: "EndScene" })
     }
 
     init(): void {}
@@ -17,30 +17,29 @@ export class EndScene extends Phaser.Scene {
         this.add
             .text(245, 130, "GAME OVER", { fontFamily: "Arial Black", fontSize: 60, color: "red" })
             .setOrigin(0.5)
-            .setStroke("black", 3);
+            .setStroke("black", 3)
         this.add
             .text(245, 170, "Click to start again", { fontFamily: "Arial Black", fontSize: 20, color: "red" })
             .setOrigin(0.5)
-            .setStroke("black", 1);
+            .setStroke("black", 1)
 
         this.input.once("pointerdown", pointer => {
-            this.scene.start("Level1Scene");
-        });
+            this.scene.start("Level1Scene")
+        })
 
-        let startGame = () => this.startGame();
-        document.addEventListener("joystick0button0", startGame);
-        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame));
+        let startGame = () => this.startGame()
+        document.addEventListener("joystick0button0", startGame)
+        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame))
     }
 
     update() {
         // console.log(this.arcade.Joysticks)
         for (let joystick of (this.game as Game).Arcade.Joysticks) {
-            joystick.update();
+            joystick.update()
         }
     }
 
     startGame() {
-        
-        this.scene.start("Level1Scene");
+        this.scene.start("Level1Scene")
     }
 }
