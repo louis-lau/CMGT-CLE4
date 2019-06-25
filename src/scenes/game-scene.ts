@@ -156,17 +156,17 @@ export class GameScene extends Phaser.Scene {
         let PartialMatch = false
         const cheats = [
             {
-                name: "Outfit change",
+                name: "New look",
                 code: "4213",
                 execute: () => this.changeCharacter()
             },
             {
-                name: "No slowdown",
+                name: "Only speed now",
                 code: "4312",
                 execute: () => this.player.setDragX(0)
             },
             {
-                name: "Speed boost",
+                name: "Turbo Turbo",
                 code: "2222",
                 execute: () => this.player.setVelocityX(400)
             },
