@@ -9,8 +9,6 @@ export class GameScene extends Phaser.Scene {
     private obstacles: Array<Phaser.GameObjects.Sprite> = [];
     private nextSceneKey: string;
     private bullets: Array<Phaser.GameObjects.Sprite> = [];
-    private rand: string;
-    private clothes: any;
 
     constructor(config: Phaser.Types.Scenes.SettingsConfig) {
         super(config);
@@ -78,9 +76,6 @@ export class GameScene extends Phaser.Scene {
         // Set camera bounds and start following
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player, true, undefined, undefined, -175);
-
-        this.clothes = ["parrot-pigeon", "flappybird", "rasta-pigeon", "white-dove"]
-        this.rand = this.clothes.[Math.floor(Math.random() * this.clothes.length)]
     }
 
     private collectFood(player: Player, food: Phaser.Physics.Arcade.Sprite) {
@@ -157,13 +152,14 @@ export class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.player.corn, food, this.destroyFo, null, this);
             }
         }
-        console.log(this.nextSceneKey);
     }
 
     //CHEATS
 
     private changeCharacter() {
-        this.player.setTexture(this.rand);
+        let clothes: Array<string> = ["parrot-pigeon", "flappybird", "rasta-pigeon", "white-dove"]
+        let randClothes: string = clothes[Math.floor(Math.random() * clothes.length)]
+        this.player.setTexture(randClothes);
     }
 
     private constantSpeed(player: Player, food: Phaser.Physics.Arcade.Sprite) {
