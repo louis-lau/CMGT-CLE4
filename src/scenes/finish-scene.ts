@@ -26,8 +26,8 @@ export class FinishScene extends Phaser.Scene {
         })
 
         let startGame = () => this.startGame()
-        document.addEventListener("joystick0button0", startGame)
-        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame))
+        document.addEventListener("buttonPressed", startGame)
+        this.events.on("shutdown", () => document.removeEventListener("buttonPressed", startGame))
     }
 
     update() {
