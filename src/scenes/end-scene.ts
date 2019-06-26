@@ -40,6 +40,6 @@ export class EndScene extends Phaser.Scene {
     }
 
     startGame() {
-        this.scene.start("ShowCheat")
+        this.scene.start("CheatShop")
     }
 }

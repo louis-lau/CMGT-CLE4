@@ -1,3 +1,5 @@
+import { CheatShop } from "./showcheat-scene";
+
 export class BootScene extends Phaser.Scene {
     constructor() {
         super({ key: "BootScene" })
@@ -30,6 +32,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image("corn", require("../assets/img/corn.png"))
         this.load.image("title-screen", require("../assets/img/title-screen.png"))
         this.load.image("cheat-screen", require("../assets/img/cheat-screen.png"))
+        this.load.image("cheat-shop", require ("../assets/img/cheat-shop.png"))
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"))
         this.load.tilemapTiledJSON("map-city2", require("../assets/maps/city2.json"))
 
