@@ -72,10 +72,7 @@ export class GameScene extends Phaser.Scene {
         let buttonCombo = event => this.buttonCombo(event)
         document.addEventListener("buttonPressed", buttonCombo)
 
-        music.play()
-
         this.events.on("shutdown", () => {
-            music.stop()
             this.player.killController()
             document.removeEventListener("buttonPressed", buttonCombo)
         })

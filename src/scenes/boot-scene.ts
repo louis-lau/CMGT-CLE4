@@ -45,7 +45,7 @@ export class BootScene extends Phaser.Scene {
 
         this.load.on("complete", () => {
             console.log("everything is loaded")
-            this.scene.start("StartScene")
+            this.scene.start("Music")
         })
     }
 }
