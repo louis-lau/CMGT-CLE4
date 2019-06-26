@@ -28,6 +28,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image("sigaret", require("../assets/img/peuk.png"))
         this.load.image("finishline", require("../assets/img/finishline.png"))
         this.load.image("corn", require("../assets/img/corn.png"))
+        this.load.image("title-screen", require("../assets/img/title-screen.png"))
         this.load.tilemapTiledJSON("map-city", require("../assets/maps/city.json"))
         this.load.tilemapTiledJSON("map-city2", require("../assets/maps/city2.json"))
 
