@@ -12,24 +12,24 @@ export class EndScene extends Phaser.Scene {
     create(): void {
         // change this to a nice game over image
 
-        //this.add.image(0, 0, 'sky').setOrigin(0, 0)
+        this.add.tileSprite(0, 0, 480, 270, "city-sky").setOrigin(0, 0)
 
         this.add
-            .text(245, 130, "GAME OVER", { fontFamily: "Arial Black", fontSize: 60, color: "red" })
+            .text(245, 130, "Birb is ded", { fontSize: 60, color: "red" })
             .setOrigin(0.5)
             .setStroke("black", 3)
         this.add
-            .text(245, 170, "Click to start again", { fontFamily: "Arial Black", fontSize: 20, color: "red" })
+            .text(245, 170, "Press any button to show a cheat code", { fontSize: 20, color: "red" })
             .setOrigin(0.5)
             .setStroke("black", 1)
 
         this.input.once("pointerdown", pointer => {
-            this.scene.start("Level1Scene")
+            this.startGame()
         })
 
         let startGame = () => this.startGame()
-        document.addEventListener("joystick0button0", startGame)
-        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame))
+        document.addEventListener("buttonPressed", startGame)
+        this.events.on("shutdown", () => document.removeEventListener("buttonPressed", startGame))
     }
 
     update() {
@@ -40,6 +40,6 @@ export class EndScene extends Phaser.Scene {
     }
 
     startGame() {
-        this.scene.start("Level1Scene")
+        this.scene.start("ShowCheat")
     }
 }

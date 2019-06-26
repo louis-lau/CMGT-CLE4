@@ -30,12 +30,7 @@ export class StartScene extends Phaser.Scene {
         this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame))
 
         this.input.once("pointerdown", pointer => {
-            this.scene.start("Level1Scene")
-
-            // Only start UI scene if it's not already active
-            if (!this.scene.isActive("UIScene")) {
-                this.scene.add("UIScene", new UIScene("UIScene"), true)
-            }
+            this.startGame()
         })
     }
 

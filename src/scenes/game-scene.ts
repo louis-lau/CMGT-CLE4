@@ -10,7 +10,7 @@ export class GameScene extends Phaser.Scene {
     private nextSceneKey: string
     private currentButtonCombo = ""
     private bullets: Array<Phaser.GameObjects.Sprite> = []
-
+    
     constructor(config: Phaser.Types.Scenes.SettingsConfig) {
         super(config)
     }
@@ -41,6 +41,33 @@ export class GameScene extends Phaser.Scene {
         this.obstacles = obstacles
         this.bullets = bullets
         this.nextSceneKey = nextSceneKey
+        this.registry.set("cheats", [
+            {
+                name: "New look",
+                code: "3333",
+                execute: () => this.changeCharacter()
+            },
+            {
+                name: "Only speed now",
+                code: "4312",
+                execute: () => this.player.setDragX(0)
+            },
+            {
+                name: "Turbo Turbo",
+                code: "2222",
+                execute: () => this.player.setVelocityX(400)
+            },
+            {
+                name: "Tiny birb",
+                code: "4213",
+                execute: () => this.player.setScale(0.5, 0.5)
+            },
+            {
+                name: "Yo momma",
+                code: "4444",
+                execute: () => this.player.setScale(2, 2)
+            }
+        ])
 
         let buttonCombo = event => this.buttonCombo(event)
         document.addEventListener("buttonPressed", buttonCombo)
@@ -154,33 +181,7 @@ export class GameScene extends Phaser.Scene {
         const eventDetail: string = event.detail
         let comboChar: string
         let PartialMatch = false
-        const cheats = [
-            {
-                name: "New look",
-                code: "4213",
-                execute: () => this.changeCharacter()
-            },
-            {
-                name: "Only speed now",
-                code: "4312",
-                execute: () => this.player.setDragX(0)
-            },
-            {
-                name: "Turbo Turbo",
-                code: "2222",
-                execute: () => this.player.setVelocityX(400)
-            },
-            {
-                name: "Tiny birb",
-                code: "3333",
-                execute: () => this.player.setScale(0.5, 0.5)
-            },
-            {
-                name: "Yo momma",
-                code: "4444",
-                execute: () => this.player.setScale(2, 2)
-            }
-        ]
+        const cheats = this.registry.values.cheats
 
         // Extract info from joystick0button0 string
         const joystick: number = Number(eventDetail.substr(8, 1))
