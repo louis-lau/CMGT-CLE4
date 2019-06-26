@@ -15,19 +15,11 @@ export class StartScene extends Phaser.Scene {
     create(): void {
         this.registry.set("score", 0)
 
-        this.add.image(0, 0, 'title-screen').setOrigin(0,0)
-        // this.add
-        //     .text(245, 130, "Schijt Duif", { fontFamily: "Arial Black", fontSize: 60, color: "white" })
-        //     .setOrigin(0.5)
-        //     .setStroke("black", 3)
-        // this.add
-        //     .text(245, 180, "Just mash buttons to start", { fontFamily: "Arial Black", fontSize: 20, color: "white" })
-        //     .setOrigin(0.5)
-        //     .setStroke("black", 1)
+        this.add.image(0, 0, "title-screen").setOrigin(0, 0)
 
         let startGame = () => this.startGame()
-        document.addEventListener("joystick0button0", startGame)
-        this.events.on("shutdown", () => document.removeEventListener("joystick0button0", startGame))
+        document.addEventListener("buttonPressed", startGame)
+        this.events.on("shutdown", () => document.removeEventListener("buttonPressed", startGame))
 
         this.input.once("pointerdown", pointer => {
             this.scene.start("Level1Scene")
