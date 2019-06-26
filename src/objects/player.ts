@@ -13,12 +13,23 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private joystick: Joystick
 
     private shootListener: EventListener
+    private shootUpListener: EventListener
+    private shootDownListener: EventListener
 
     constructor(scene) {
         super(scene, 50, 135, "pigeon")
 
-        // this.shootListener = () => this.test1();
-        // document.addEventListener("joystick0button0", this.shootListener)
+
+
+        this.shootListener = () => this.shoot()
+        document.addEventListener("joystick1button0", this.shootListener)
+        
+        this.shootUpListener = () => this.shootUp()
+        document.addEventListener("joystick1button0", this.shootUpListener)
+
+        this.shootDownListener = () => this.shootDown()
+        document.addEventListener("joystick1button0", this.shootDownListener)
+
 
         // gameover, shut down, andere scene
         // document.removeEventListener("joystick0button0", this.shootListerner)
@@ -44,27 +55,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(200)
         }
 
-        if (this.cursors.space.isDown && this.loadShoot == 0 && this.ammo > 0) {
-            this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn")
-            this.corn.setVelocityX(this.body.velocity.x + 150)
-            this.scene.sound.play("shoot")
-            this.loadShoot++
-            this.ammo--
-        }
-
         let ourGame = this.scene.game as Game
         for (const joystick of ourGame.Arcade.Joysticks) {
             joystick.update()
 
-            if (joystick.Up) {
+            if (ourGame.Arcade.Joysticks[0].Up) {
                 this.setVelocityY(-200)
-            } else if (joystick.Down) {
+            } else if (ourGame.Arcade.Joysticks[0].Down) {
                 this.setVelocityY(200)
             }
-        }
-
-        if (this.cursors.space.isUp) {
-            this.loadShoot = 0
         }
 
         if (this.lives <= 0 || this.body.velocity.x <= 0) {
@@ -125,7 +124,56 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         whiteShitEmitter.startFollow(this)
     }
 
+    
+    public shoot() {
+        let ourGame = this.scene.game as Game 
+        
+        if (this.ammo > 0) {
+                
+                if (!ourGame.Arcade.Joysticks[1].Up && !ourGame.Arcade.Joysticks[1].Down) {
+                    this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn")
+                    this.corn.setVelocityX(this.body.velocity.x + 150)
+                    this.scene.sound.play("shoot")
+                    this.ammo--
+                }
+            }
+        }
+    
+
+
+      public shootUp() {
+        let ourGame = this.scene.game as Game 
+
+        if (this.ammo > 0) {
+          
+                if (ourGame.Arcade.Joysticks[1].Up) {
+                    this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn")
+                    this.corn.setVelocityX(this.body.velocity.x + 150)
+                    this.corn.setVelocityY(-150)
+                    this.scene.sound.play("shoot")
+                    this.ammo--
+                }
+            }
+        }
+    
+ 
+
+   public shootDown() {
+        let ourGame = this.scene.game as Game 
+        if (this.ammo > 0) {
+          
+                if (ourGame.Arcade.Joysticks[1].Down) { 
+                    this.corn = this.scene.physics.add.sprite(this.getTopRight().x + 1, this.getTopRight().y + 5, "corn")
+                    this.corn.setVelocityX(this.body.velocity.x + 150)
+                    this.corn.setVelocityY(150)
+                    this.scene.sound.play("shoot")
+                    this.ammo--
+                }
+            }
+        }
+  
+
     public killController() {
-        document.removeEventListener("joystick0button0", this.shootListener)
+        document.removeEventListener("joystick1button0", this.shootListener)
     }
 }
