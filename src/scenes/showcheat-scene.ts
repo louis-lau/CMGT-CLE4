@@ -12,6 +12,11 @@ export class ShowCheat extends Phaser.Scene {
         const randomCheat = cheats[Math.floor(Math.random() * cheats.length)]
         console.log(randomCheat.code)
         this.add.text(245, 220, randomCheat.code, { fontSize: 60, color: "black" }).setOrigin(0.5)
+        this.add.text(245, 40, "This only works with a controller!", { fontSize: 20, color: "red" }).setOrigin(0.5)
+
+        this.input.once("pointerdown", pointer => {
+            this.startGame()
+        })
 
         let startGame = () => this.startGame()
         document.addEventListener("buttonPressed", startGame)

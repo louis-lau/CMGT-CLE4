@@ -8,6 +8,10 @@ export class CheatShop extends Phaser.Scene {
     create() {
         this.add.image(0, 0, "cheat-shop").setOrigin(0, 0)
 
+        this.input.once("pointerdown", pointer => {
+            this.startGame()
+        })
+
         let startGame = () => this.startGame()
         document.addEventListener("buttonPressed", startGame)
         this.events.on("shutdown", () => document.removeEventListener("buttonPressed", startGame))
